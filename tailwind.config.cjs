@@ -8,7 +8,11 @@ module.exports = {
     fontFamily: {
       "mainFont": ['Inter', 'Poppins']
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "mainBg": "url('/src/assets/illistration_background.jpg')"
+      }
+    },
   },
   plugins: [],
 }

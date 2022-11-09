@@ -1,5 +1,5 @@
 
-export const inputStyles = " h-10 p-4 w-[100%] border-[1px] rounded-lg outline-none "
+export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-xl outline-none "
 
 const Login = () => {
    return (
