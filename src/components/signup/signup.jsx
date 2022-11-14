@@ -1,6 +1,7 @@
 
 import { useCallback, useMemo } from "react"
 import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { inputStyles } from "../login/login"
 
 const Signup = (props) => {
@@ -10,6 +11,7 @@ const Signup = (props) => {
    const [showPassword, setShowPassword] = useState(false)
    const [successMessage, setSuccessMessage] = useState('')
    const [responseStatus, setResponseStatus] = useState(200)
+   const navigate = useNavigate()
 
 
    const handleUserName = (e) => {
@@ -132,8 +134,11 @@ const Signup = (props) => {
             </div>}
             <p>Have an account ?
                <button
-                  className="ml-3 text-cyan-600" >
-                  Signin
+                  className="ml-3 text-cyan-600"
+                  onClick={() => {
+                     navigate('/')
+                  }}
+                  type='button' > Signin
                </button>
             </p>
          </div>
