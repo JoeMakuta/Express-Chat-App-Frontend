@@ -3,9 +3,10 @@ import Message from './message'
 import SendMessage from './send_message'
 import { MessageContext } from '../../App'
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Chat = () => {
-
+   const navigate = useNavigate()
    const messageContext = useContext(MessageContext)
 
    return (
@@ -17,7 +18,6 @@ const Chat = () => {
          }
          <SendMessage className=' self-center ' />
       </div>
-
    )
 }
 

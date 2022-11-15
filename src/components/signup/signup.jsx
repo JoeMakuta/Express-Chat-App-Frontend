@@ -1,10 +1,14 @@
 
 import { useCallback, useMemo } from "react"
+import { useContext } from "react"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { MessageContext } from "../../App"
 import { inputStyles } from "../login/login"
 
 const Signup = (props) => {
+
+   const messageContext = useContext(MessageContext)
 
    const [matchedPWD, setMatchedPWD] = useState(false)
    const [repeatPassword, setRepeatPassword] = useState(false)
@@ -15,13 +19,13 @@ const Signup = (props) => {
 
 
    const handleUserName = (e) => {
-      props.setUserName(e)
+      messageContext.setUserName(e)
    }
    const handleUserEmail = (e) => {
-      props.setUserEmail(e)
+      messageContext.setUserEmail(e)
    }
    const handleUserPassword = (e) => {
-      props.setUserPassword(e)
+      messageContext.setUserPassword(e)
    }
    const passWordMatched = (passWord1, passWord2) => {
       if (passWord1 == passWord2) {
@@ -33,7 +37,6 @@ const Signup = (props) => {
       }
    }
 
-
    const insert_data = async () => {
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/signup', {
          method: 'POST',
@@ -43,9 +46,9 @@ const Signup = (props) => {
          },
          body: JSON.stringify(
             {
-               "userName": props.userName,
-               "userEmail": props.userEmail,
-               "passWord": props.userPassword
+               "userName": messageContext.userName,
+               "userEmail": messageContext.userEmail,
+               "passWord": messageContext.userPassword
             }
          )
       }).then(data => data.json())
@@ -73,7 +76,7 @@ const Signup = (props) => {
             className="flex flex-col text-start text-sm gap-4 w-full "
             onSubmit={(e) => {
                e.preventDefault()
-               passWordMatched(props.userPassword, repeatPassword) ? insert_data() : null
+               passWordMatched(messageContext.userPassword, repeatPassword) ? insert_data() : null
             }}
          >
             <div className="flex gap-3 items-center justify-between ">

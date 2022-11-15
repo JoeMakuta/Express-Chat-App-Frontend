@@ -1,12 +1,20 @@
+import { useEffect } from "react"
+import { useContext } from "react"
 import { useState } from "react"
+import { AiFillQqCircle } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
+
+import { MessageContext } from "../../App"
 
 export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-xl outline-none "
 
-const Login = (props) => {
+
+const Login = () => {
+   const messageContext = useContext(MessageContext)
 
    const [showPassword, setShowPassword] = useState(false)
    const [response, setResponse] = useState({})
+   const [authenticated, setAuthenticated] = useState(false)
    const navigate = useNavigate()
 
    const loginUser = async () => {
@@ -17,23 +25,30 @@ const Login = (props) => {
          },
          body: JSON.stringify(
             {
-               "userEmail": props.userEmail,
-               "passWord": props.userPassword
+               "userEmail": messageContext.userEmail,
+               "passWord": messageContext.userPassword
             }
          )
       }).then(data => data.json())
          .then((data) => {
             setResponse(data)
+            if (data.token) {
+               localStorage.setItem('userName', data.userName)
+               localStorage.setItem('token', data.token)
+            }
             console.log(data)
-            redirectChat()
+            if (data.status == 200) {
+               navigate('/chat')
+            }
          })
    }
 
-   const redirectChat = async () => {
-      if (response.status == 200) {
+   useEffect(() => {
+      const token = localStorage.getItem("token")
+      if (token) {
          navigate('/chat')
       }
-   }
+   }, [])
 
    return (
       <form className=" text-center w-[85vw] sm:w-[25vw] h-fit sm:h-[70vh] bg-white text-sm rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-xl "
@@ -48,7 +63,7 @@ const Login = (props) => {
          {
             response && <div className={response.status == 200 ? " text-3xl text-green-400 " : " text-3xl text-red-700 "}>
                {response.message}
-            </div> 
+            </div>
          }
          <div className="flex flex-col text-start text-sm gap-4 w-full " >
             <input type="email"
@@ -56,7 +71,7 @@ const Login = (props) => {
                placeholder="Email/Username"
                className={inputStyles}
                onChange={(e) => {
-                  props.setUserEmail(e.target.value)
+                  messageContext.setUserEmail(e.target.value)
                }} />
             <input
                required={true}
@@ -64,7 +79,7 @@ const Login = (props) => {
                placeholder="Password"
                className={inputStyles}
                onChange={(e) => {
-                  props.setUserPassword(e.target.value)
+                  messageContext.setUserPassword(e.target.value)
                }} />
             <button type="button"
                onClick={() => {
