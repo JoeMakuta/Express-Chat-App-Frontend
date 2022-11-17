@@ -14,7 +14,7 @@ const SendMessage = (props) => {
 
    return <div className=" flex gap-3 items-center fixed bottom-10 right-14  " >
       <input
-         className=" sm:w-[54vw] outline-none  rounded-xl bg-gray-300 p-4   "
+         className=" sm:w-[54vw] outline-none  rounded-xl bg-white p-4   "
          type="text"
          onChange={(e) => {
             setInputMessage(e.target.value)

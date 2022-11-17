@@ -16,7 +16,7 @@ const Chat = () => {
       <div className=' flex w-[95vw] items-center justify-between flex-wrap ' >
          <SideMenu />
          <Users />
-         <div className=" flex flex-col w-[60vw] bg-black bg-opacity-10 p-5 rounded-lg h-[95vh]  " >
+         <div className=" flex flex-col w-[60vw] bg-black bg-opacity-10 pl-5 pt-2 rounded-lg h-[95vh]  " >
             {
                messageContext.allMessages.map((elt, index) => {
                   return <Message key={index} name={elt.name} message={elt.message} />

@@ -24,9 +24,9 @@ const sideMenu = () => {
       <div className=' flex flex-col  w-14 justify-between items-center h-[100vh] pb-10'>
          <div className=' flex flex-col gap-8 pt-52' >
             {
-               menuItems.map((elt) => {
+               menuItems.map((elt, index) => {
                   return (
-                     <div className='cursor-pointer' >
+                     <div key={index} className='cursor-pointer' >
                         {elt.icon}
                      </div>
                   )
