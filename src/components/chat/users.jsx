@@ -12,7 +12,7 @@ const usersItems = [
    },
    {
       name: 'Linda',
-      image: 'https://api.lorem.space/image/face?w=150&h=150',
+      image: 'https://api.lorem.space/image/fashion?w=150&h=150',
       lastMessage: 'Hello my bro, How is it ?'
    },
    {
@@ -25,7 +25,7 @@ const usersItems = [
       image: 'https://api.lorem.space/image/face?w=150&h=150',
       lastMessage: 'Hello my bro, How is it ?'
    },
-   
+
 ]
 
 const users = () => {
@@ -39,9 +39,9 @@ const users = () => {
          </div>
          <div className=' flex flex-col gap-3 ' >
             {
-               usersItems.map((elt) => {
+               usersItems.map((elt, index) => {
                   return (
-                     <div className=' flex bg-black bg-opacity-10 p-4 rounded-lg justify-start gap-3 ' >
+                     <div key={index} className=' flex bg-black bg-opacity-10 hover:bg-opacity-90 hover:scale-105 cursor-pointer hover:bg-person_background p-4 rounded-lg justify-start gap-3 ' >
                         <img className=' rounded-full w-10' src={elt.image} />
                         <div>
                            <p className=' text-sm font-bold ' >{elt.name}</p>
