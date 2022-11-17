@@ -12,11 +12,12 @@ function App() {
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [allMessages, setAllMessages] = useState([])
+  const [allUsers, setAllUsers] = useState([])
 
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages }} >
       <div
-        className="font-[Poppins] font-normal gap-10 flex justify-center items-center h-[100vh]  bg-gray-200 ">
+        className="font-[Poppins] bg-cover bg-opacity-30 font-normal gap-10 h-[100vh] flex justify-center bg-gray-200 ">
         <BrowserRouter>
           <Routes>
             <Route

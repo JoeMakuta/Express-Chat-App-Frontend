@@ -1,5 +1,3 @@
-
-
 import { AiOutlineSend } from 'react-icons/ai'
 import { useState } from 'react'
 import { MessageContext } from '../../App'
@@ -14,9 +12,9 @@ const SendMessage = (props) => {
       messageContext.setAllMessages(messageContext.allMessages.concat([{ name: 'Josh', message: inputMessage }]));
    }
 
-   return <div className=" flex self-center  gap-[1vw] fixed bottom-10  " >
+   return <div className=" flex gap-3 items-center fixed bottom-10 right-14  " >
       <input
-         className=" w-[80vw]  outline-none border-[1px] rounded-full bg-gray-300 p-5 "
+         className=" sm:w-[54vw] outline-none  rounded-xl bg-gray-300 p-4   "
          type="text"
          onChange={(e) => {
             setInputMessage(e.target.value)
@@ -29,14 +27,12 @@ const SendMessage = (props) => {
          }}
       />
       <button
-         className=" flex items-center justify-center rounded-full h-16 w-16 bg-person_background active:bg-message_background "
+         className=" flex items-center justify-center rounded-full h-12 w-12 bg-person_background active:bg-message_background "
          onClick={(e) => {
             handleSend()
             e.target.value = ''
          }} >
-         <AiOutlineSend
-            size={30}
-            color='#ffffff' />
+         <AiOutlineSend size={20} color='#ffffff' />
       </button>
    </div>
 }

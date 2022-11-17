@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 
 import { MessageContext } from "../../App"
 
-export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-xl outline-none "
+export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-lg outline-none "
 
 
 const Login = () => {
@@ -51,7 +51,7 @@ const Login = () => {
    }, [])
 
    return (
-      <form className=" text-center w-[85vw] sm:w-[25vw] h-fit sm:h-[70vh] bg-white text-sm rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-xl "
+      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit sm:h-[70vh] bg-white bg-opacity-90 text-sm rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
          onSubmit={(e) => {
             e.preventDefault()
             loginUser()
