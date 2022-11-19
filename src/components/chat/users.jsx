@@ -1,34 +1,26 @@
+import { useEffect } from 'react'
+import { useContext } from 'react'
 import { BsSearch } from 'react-icons/bs'
-const usersItems = [
-   {
-      name: 'Josh',
-      image: 'https://api.lorem.space/image/face?w=150&h=150',
-      lastMessage: 'Hello my bro, How is it ?'
-   },
-   {
-      name: 'Sabine',
-      image: 'https://api.lorem.space/image/face?w=150&h=150',
-      lastMessage: 'Hello my bro, How is it ?'
-   },
-   {
-      name: 'Linda',
-      image: 'https://api.lorem.space/image/fashion?w=150&h=150',
-      lastMessage: 'Hello my bro, How is it ?'
-   },
-   {
-      name: 'Sam',
-      image: 'https://api.lorem.space/image/face?w=150&h=150',
-      lastMessage: 'Hello my bro, How is it ?'
-   },
-   {
-      name: 'Josh',
-      image: 'https://api.lorem.space/image/face?w=150&h=150',
-      lastMessage: 'Hello my bro, How is it ?'
-   },
-
-]
+import { MessageContext } from '../../App'
 
 const users = () => {
+   const messageContext = useContext(MessageContext)
+
+   useEffect(() => {
+      fetch(import.meta.env.VITE_USER_HOST_NAME + '/users', {
+         method: 'GET',
+         headers: {
+            "Content-Type": "application/json"
+         },
+      }).then((data) => data.json())
+         .then((data) => {
+            console.log(data);
+            messageContext.setAllUsers(data.users)
+            console.log(messageContext.allUsers);
+         })
+   }, [])
+
+
    return (
       <div className="flex flex-col justify-start gap-10 pt-9 pb-10 w-[25vw] h-[100vh] " >
          <div className=' flex items-center justify-between ' >
@@ -39,13 +31,18 @@ const users = () => {
          </div>
          <div className=' flex flex-col gap-3 ' >
             {
-               usersItems.map((elt, index) => {
+               messageContext.allUsers.map((elt, index) => {
                   return (
-                     <div key={index} className=' flex bg-black bg-opacity-10 hover:bg-opacity-90 hover:scale-105 cursor-pointer hover:bg-person_background p-4 rounded-lg justify-start gap-3 ' >
+                     <div key={index} className={elt == messageContext.userReceiver ? "flex  hover:bg-opacity-90 scale-105 cursor-pointer bg-person_background p-4 rounded-lg justify-start gap-3" : "flex bg-black bg-opacity-10 hover:bg-opacity-20 hover:scale-105 cursor-pointer  p-4 rounded-lg justify-start gap-3"}
+                        onClick={() => {
+                           messageContext.setUserReceiver(elt)
+                           messageContext.setShowConversation(true)
+                        }}
+                     >
                         <img className=' rounded-full w-10' src={elt.image} />
                         <div>
-                           <p className=' text-sm font-bold ' >{elt.name}</p>
-                           <p className=' text-xs ' >{elt.lastMessage}</p>
+                           <p className=' text-sm font-bold ' >{elt.userName}</p>
+                           <p className=' text-xs ' >{elt.userEmail}</p>
                         </div>
                      </div>
                   )
