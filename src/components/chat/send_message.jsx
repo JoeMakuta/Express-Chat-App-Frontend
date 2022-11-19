@@ -16,6 +16,7 @@ const SendMessage = (props) => {
       <input
          className=" sm:w-[54vw] outline-none  rounded-xl bg-white p-4   "
          type="text"
+         id='messageInput'
          onChange={(e) => {
             setInputMessage(e.target.value)
          }}
@@ -30,7 +31,7 @@ const SendMessage = (props) => {
          className=" flex items-center justify-center rounded-full h-12 w-12 bg-person_background active:bg-message_background "
          onClick={(e) => {
             handleSend()
-            e.target.value = ''
+            document.getElementById('messageInput').value = ''
          }} >
          <AiOutlineSend size={20} color='#ffffff' />
       </button>

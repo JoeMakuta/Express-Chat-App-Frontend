@@ -1,5 +1,4 @@
 import { RiLogoutCircleLine } from 'react-icons/ri'
-import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineMessage } from 'react-icons/ai'
 import { VscAccount, VscSettingsGear } from 'react-icons/vsc'
 import { GrHomeRounded } from 'react-icons/gr'
@@ -22,11 +21,11 @@ const menuItems = [
 const sideMenu = () => {
    return (
       <div className=' flex flex-col  w-14 justify-between items-center h-[100vh] pb-10'>
-         <div className=' flex flex-col gap-8 pt-52' >
+         <div className=' flex flex-col gap-2 pt-52' >
             {
                menuItems.map((elt, index) => {
                   return (
-                     <div key={index} className='cursor-pointer' >
+                     <div key={index} className="cursor-pointer w-14 h-14 flex justify-center items-center rounded-full hover:bg-person_background " >
                         {elt.icon}
                      </div>
                   )
