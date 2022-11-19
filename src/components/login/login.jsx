@@ -32,9 +32,12 @@ const Login = () => {
       }).then(data => data.json())
          .then((data) => {
             setResponse(data)
+            console.log(data);
             if (data.token) {
-               localStorage.setItem('userName', data.userName)
                localStorage.setItem('token', data.token)
+               localStorage.setItem('userId', data.user._id)
+               localStorage.setItem('userName', data.user.userName)
+               localStorage.setItem('userEmail', data.user.userEmail)
             }
             console.log(data)
             if (data.status == 200) {
