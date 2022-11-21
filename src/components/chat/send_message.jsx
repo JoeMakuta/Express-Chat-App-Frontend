@@ -5,6 +5,7 @@ import { useContext } from 'react'
 // import { getUserMessages } from './users'
 
 
+
 const SendMessage = (props) => {
    const messageContext = useContext(MessageContext)
    const [inputMessage, setInputMessage] = useState(null)
@@ -24,6 +25,7 @@ const SendMessage = (props) => {
             }
          )
       })
+      getUserMessages(localStorage.getItem('receiverId'))
    }
 
    return <div className=" flex gap-3 items-center fixed bottom-10 right-14  " >

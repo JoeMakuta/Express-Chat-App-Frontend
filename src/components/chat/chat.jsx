@@ -13,6 +13,21 @@ const Chat = () => {
    const navigate = useNavigate()
    const messageContext = useContext(MessageContext)
 
+   useEffect(() => {
+      fetch(import.meta.env.VITE_USER_HOST_NAME + '/getMessages', {
+         method: 'GET',
+         headers: {
+            'Content-Type': 'application/json'
+         }
+      }).then(data => data.json())
+         .then(data => {
+            messageContext.setAllMessages(data.messages);
+         })
+         .then(() => {
+            console.log('All messages : ', messageContext.allMessages)
+         })
+   }, [])
+
    return (
       <div className=' flex w-[95vw] items-center justify-between flex-wrap ' >
          <SideMenu />
@@ -21,7 +36,7 @@ const Chat = () => {
             {messageContext.showConversation ? <ReceiverUser /> : ''}
             <div className=' flex flex-col  ' >
                {
-                  messageContext.allMessages.map((elt, index) => {
+                  messageContext.userMessages.map((elt, index) => {
                      return (
                         <div key={index} className={elt.senderId == localStorage.getItem('userId') ? " flex gap-[0.5vw] self-end mt-2 mb-2" : " flex gap-[0.5vw] self-start mt-2 mb-2"} >
                            <div className=" flex justify-center items-center w-10 h-10 rounded-full bg-person_background  font-bold text-xl " >
