@@ -14,12 +14,13 @@ function App() {
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
   const [allMessages, setAllMessages] = useState([])
+  const [userMessages, setUserMessages] = useState([])
   const [allUsers, setAllUsers] = useState([])
   const [userReceiver, setUserReceiver] = useState([])
   const [showConversation, setShowConversation] = useState(false)
 
   return (
-    <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation }} >
+    <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
         className="font-[Poppins] bg-cover bg-opacity-30 font-normal gap-10 h-[100vh] flex justify-center bg-gray-200 ">
         <BrowserRouter>
