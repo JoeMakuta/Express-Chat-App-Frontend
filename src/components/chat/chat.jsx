@@ -14,7 +14,7 @@ const Chat = () => {
    const messageContext = useContext(MessageContext)
 
    useEffect(() => {
-      fetch(import.meta.env.VITE_USER_HOST_NAME + '/getMessages', {
+      fetch(import.meta.env.VITE_USER_HOST_NAME + '/getMessages/' + localStorage.getItem('userId'), {
          method: 'GET',
          headers: {
             'Content-Type': 'application/json'
@@ -26,7 +26,9 @@ const Chat = () => {
          .then(() => {
             console.log('All messages : ', messageContext.allMessages)
          })
+
    }, [])
+
 
    return (
       <div className=' flex w-[95vw] items-center justify-between flex-wrap ' >

@@ -8,9 +8,6 @@ import { MessageContext } from "../../App"
 const ReceiverUser = () => {
    const messageContext = useContext(MessageContext)
 
-   // useEffect(() => {
-   //    messageContext.setUserReceiver(messageContext.allUsers[0])
-   // })
 
    return (
       <div className=" flex flex-col items-center justify-between pt-2 " >
