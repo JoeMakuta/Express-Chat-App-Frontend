@@ -7,6 +7,7 @@ import { MessageContext } from '../../App'
 
 const users = () => {
    const messageContext = useContext(MessageContext)
+
    const getUserMessages = (receiverId) => {
       localStorage.setItem('receiverId', receiverId)
       messageContext.setUserMessages(
@@ -16,6 +17,7 @@ const users = () => {
          ))
       console.log('User messages : ', messageContext.userMessages);
    }
+
    useEffect(() => {
       fetch(import.meta.env.VITE_USER_HOST_NAME + '/users', {
          method: 'GET',

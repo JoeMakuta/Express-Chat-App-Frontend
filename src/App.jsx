@@ -7,8 +7,6 @@ import { createContext } from "react"
 
 export const MessageContext = createContext()
 
-
-
 function App() {
   const [userName, setUserName] = useState('Josh')
   const [userEmail, setUserEmail] = useState('')

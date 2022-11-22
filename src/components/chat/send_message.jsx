@@ -3,15 +3,15 @@ import { useState } from 'react'
 import { MessageContext } from '../../App'
 import { useContext } from 'react'
 // import { getUserMessages } from './users'
+import { io } from 'socket.io-client'
 
-
+export const socket = io(import.meta.env.VITE_USER_HOST_NAME)
 
 const SendMessage = (props) => {
    const messageContext = useContext(MessageContext)
    const [inputMessage, setInputMessage] = useState(null)
 
    const handleSend = async () => {
-      // messageContext.setAllMessages(messageContext.allMessages.concat([{ name: 'Josh', message: inputMessage }]));
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/newMessage', {
          method: 'POST',
          headers: {
@@ -24,8 +24,16 @@ const SendMessage = (props) => {
                message: inputMessage
             }
          )
+      }).then(() => {
+         messageContext.setUserMessages(messageContext.userMessages.concat(
+            [
+               {
+                  senderId: localStorage.getItem('userId'),
+                  message: inputMessage
+               }
+            ]));
       })
-      getUserMessages(localStorage.getItem('receiverId'))
+
    }
 
    return <div className=" flex gap-3 items-center fixed bottom-10 right-14  " >
