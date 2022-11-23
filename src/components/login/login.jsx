@@ -4,13 +4,11 @@ import { useState } from "react"
 import { AiFillEyeInvisible, AiFillEye, AiOutlineEye } from "react-icons/ai"
 import { FaRegUser } from 'react-icons/fa'
 import { Link, useNavigate } from "react-router-dom"
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { MessageContext } from "../../App"
+import { MessageContext, showToastMessage } from "../../App"
 
 export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-lg outline-none "
-
 
 const Login = () => {
    const messageContext = useContext(MessageContext)
@@ -19,13 +17,6 @@ const Login = () => {
    const [response, setResponse] = useState({})
    const [authenticated, setAuthenticated] = useState(false)
    const navigate = useNavigate()
-
-   const showToastMessage = () => {
-      console.log('React Toast');
-      toast.success('Success Notification !', {
-         position: toast.POSITION.TOP_RIGHT
-      });
-   };
 
    const loginUser = async () => {
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/login', {
@@ -52,7 +43,6 @@ const Login = () => {
             }
             console.log(data)
             if (data.status == 200) {
-
                navigate('/chat')
             }
          })
@@ -61,15 +51,15 @@ const Login = () => {
    useEffect(() => {
       const token = localStorage.getItem("token")
       if (token) {
+         showToastMessage('Logged as ' + localStorage.getItem('userName'), 3)
          navigate('/chat')
       }
    }, [])
 
    return (
-      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
+      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
          onSubmit={(e) => {
             e.preventDefault()
-            showToastMessage()
             loginUser()
          }}>
 
@@ -78,11 +68,9 @@ const Login = () => {
             <p className=" font-bold text-xl " >User Login</p>
             <p className=" text-gray-600 text-sm " >Hey, enter your details to get sign in to your account</p>
          </div>
-         {
-            response && <div className={response.status == 200 ? " text-3xl text-green-400 " : " text-3xl text-red-700 "}>
-               {response.message}
-            </div>
-         }
+         {/* {
+            response && showToastMessage(response.message, 2)
+         } */}
 
          <div className="flex flex-col text-start text-sm gap-4 w-full " >
             <div>
@@ -120,7 +108,7 @@ const Login = () => {
             className=" flex flex-col gap-3 pt-5 w-full" >
             <button
                type="submit"
-               className=" w-full h-10 rounded-lg bg-orange-400 "
+               className=" w-full h-10 rounded-lg bg-orange-400 active:bg-black "
             >
                SIGN IN
             </button>

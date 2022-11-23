@@ -2,6 +2,7 @@
 import { useCallback, useMemo } from "react"
 import { useContext } from "react"
 import { useState } from "react"
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
 import { MessageContext } from "../../App"
 import { inputStyles } from "../login/login"
@@ -57,19 +58,18 @@ const Signup = (props) => {
             console.log(data);
             setSuccessMessage(data.message)
             setResponseStatus(data.status)
-            navigate('/')
          })
 
    }
 
    return (
-      <div className=" text-center w-[85vw] sm:w-[30vw] h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-lg  gap-5  " >
+      <div className=" text-center w-[85vw] sm:w-[30vw] h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col p-[30px] shadow-lg  gap-2  " >
 
-         <div className="flex flex-col  p-6 pt-0 gap-3" >
+         <div className="flex flex-col items-center pt-0 gap-3" >
             <p className=" font-bold text-2xl " >Create Account</p>
-            <p>Hey, enter your details to get sign up to the Express chat app</p>
+            <p className=" w-[80%] text-xs " >Hey, enter your details to get sign up to the Express chat app</p>
          </div>
-         <div className={responseStatus == 403 ? " text-red-600 text-4xl " : " text-green-600 text-4xl "} >
+         <div className={responseStatus == 403 ? " text-red-600 text-2xl " : " text-green-600 text-2xl "} >
             {
                successMessage
             }
@@ -87,7 +87,7 @@ const Signup = (props) => {
                   type="text"
                   placeholder="Username"
                   required={true}
-                  className={inputStyles + "w-[50%]"}
+                  className={inputStyles + "w-[60%]"}
                   onChange={(e) => { handleUserName(e.target.value) }}
                />
             </div>
@@ -97,22 +97,24 @@ const Signup = (props) => {
                   type="email"
                   placeholder="makutajosue@gmail.com"
                   required={true}
-                  className={inputStyles + "w-[70%]"}
+                  className={inputStyles + "w-[60%]"}
                   onChange={(e) => { handleUserEmail(e.target.value) }}
                />
             </div>
             <div className="flex  gap-3 items-center justify-between">
                <p>Password :</p>
-               <input
-                  type={showPassword ? 'text' : 'password'}
-                  required={true}
-                  placeholder="Password"
-                  className={inputStyles + "w-[60%]"}
-                  onChange={(e) => { handleUserPassword(e.target.value) }}
-               />
-               <button type="button" onClick={() => {
-                  showPassword ? setShowPassword(false) : setShowPassword(true)
-               }} >{showPassword ? 'Hide' : "Show"}</button>
+               <div className={inputStyles + "w-[60%] flex items-center "} >
+                  <input
+                     type={showPassword ? 'text' : 'password'}
+                     required={true}
+                     placeholder="Password"
+                     className=" outline-none w-[90%] "
+                     onChange={(e) => { handleUserPassword(e.target.value) }}
+                  />
+                  <button type="button" onClick={() => {
+                     showPassword ? setShowPassword(false) : setShowPassword(true)
+                  }} >{showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}</button>
+               </div>
             </div>
             <div className="flex  gap-3 items-center justify-between">
                <p>Repeat Password :</p>

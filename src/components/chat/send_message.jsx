@@ -3,19 +3,23 @@ import { useState } from 'react'
 import { MessageContext } from '../../App'
 import { useContext } from 'react'
 // import { getUserMessages } from './users'
-import { io } from 'socket.io-client'
+import { socket } from '../../App'
 
-export const socket = io(import.meta.env.VITE_USER_HOST_NAME)
+
 
 const SendMessage = (props) => {
    const messageContext = useContext(MessageContext)
    const [inputMessage, setInputMessage] = useState(null)
 
    const handleSend = async () => {
+
+
+
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/newMessage', {
          method: 'POST',
          headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
          },
          body: JSON.stringify(
             {
@@ -25,20 +29,26 @@ const SendMessage = (props) => {
             }
          )
       }).then(() => {
-         messageContext.setUserMessages(messageContext.userMessages.concat(
-            [
-               {
-                  senderId: localStorage.getItem('userId'),
-                  message: inputMessage
-               }
-            ]));
+         socket.emit('message', {
+            message: inputMessage,
+            senderId: localStorage.getItem('userId'),
+            receiverId: localStorage.getItem('receiverId'),
+            socketId: socket.id
+         });
+         // messageContext.setUserMessages(messageContext.userMessages.concat(
+         //    [
+         //       {
+         //          senderId: localStorage.getItem('userId'),
+         //          message: inputMessage
+         //       }
+         //    ]));
       })
 
    }
 
    return <div className=" flex gap-3 mt-4 items-center " >
       <input
-      placeholder='Write your message ...'
+         placeholder='Write your message ...'
          className=" sm:w-[52vw] text-sm outline-none  rounded-xl bg-white p-4   "
          type="text"
          id='messageInput'
