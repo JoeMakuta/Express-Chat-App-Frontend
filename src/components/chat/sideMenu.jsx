@@ -32,7 +32,15 @@ const sideMenu = () => {
 
    return (
       <div className=' flex flex-col  w-14 justify-between items-center h-[100vh] pb-10'>
-         <div className=' flex flex-col gap-2 h-[60%] justify-end  ' >
+         <div>
+            <div>
+               {
+                  localStorage.getItem('userName')
+               }
+            </div>
+            <img  alt="" />
+         </div>
+         <div className=' flex flex-col gap-2 h-[50%] justify-center  ' >
             {
                menuItems.map((elt, index) => {
                   return (
@@ -45,10 +53,10 @@ const sideMenu = () => {
          </div>
 
          <div className=' flex justify-center items-center flex-col gap-10 ' >
-            <VscAccount
+            {/* <VscAccount
                className='cursor-pointer'
                size={30}
-               color='#000000' />
+               color='#000000' /> */}
             <RiLogoutCircleLine
                className='cursor-pointer'
                size={20}

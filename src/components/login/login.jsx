@@ -38,6 +38,7 @@ const Login = () => {
                localStorage.setItem('userId', data.user._id)
                localStorage.setItem('userName', data.user.userName)
                localStorage.setItem('userEmail', data.user.userEmail)
+               localStorage.setItem('imageUrl', data.user.image)
             }
             console.log(data)
             if (data.status == 200) {

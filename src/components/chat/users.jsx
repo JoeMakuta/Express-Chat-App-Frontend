@@ -3,13 +3,12 @@ import { useContext } from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { MessageContext } from '../../App'
 
-
-
 const users = () => {
    const messageContext = useContext(MessageContext)
 
    const getUserMessages = (receiverId) => {
       localStorage.setItem('receiverId', receiverId)
+
       messageContext.setUserMessages(
          messageContext.allMessages.filter((elt) => {
             return (elt.senderId == localStorage.getItem('userId') || elt.senderId == receiverId) && (elt.receiverId == localStorage.getItem('userId') || elt.receiverId == receiverId)
@@ -26,12 +25,10 @@ const users = () => {
          },
       }).then((data) => data.json())
          .then((data) => {
-            console.log(data);
+            console.log("Users : ", data);
             messageContext.setAllUsers(data.users)
          })
    }, [])
-
-
 
    return (
       <div className="flex flex-col justify-start gap-10 pt-9 pb-10 w-[25vw] h-[100vh] " >
@@ -50,8 +47,7 @@ const users = () => {
                            messageContext.setUserReceiver(elt)
                            messageContext.setShowConversation(true)
                            getUserMessages(elt._id);
-                        }}
-                     >
+                        }}>
                         <img className=' rounded-full w-10' src={elt.image} />
                         <div>
                            <p className=' text-sm font-bold ' >{elt.userName}</p>

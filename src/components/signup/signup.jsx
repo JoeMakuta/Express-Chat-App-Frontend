@@ -56,6 +56,7 @@ const Signup = (props) => {
             console.log(data);
             setSuccessMessage(data.message)
             setResponseStatus(data.status)
+            navigate('/')
          })
 
    }
