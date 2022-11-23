@@ -8,6 +8,7 @@ import { inputStyles } from "../login/login"
 
 const Signup = (props) => {
 
+
    const messageContext = useContext(MessageContext)
 
    const [matchedPWD, setMatchedPWD] = useState(false)
@@ -56,6 +57,7 @@ const Signup = (props) => {
             console.log(data);
             setSuccessMessage(data.message)
             setResponseStatus(data.status)
+            navigate('/')
          })
 
    }

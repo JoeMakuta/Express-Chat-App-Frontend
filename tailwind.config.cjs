@@ -14,7 +14,7 @@ module.exports = {
       },
       colors: {
         'message_background': '#474747',
-        'person_background': '#008B69'
+        'person_background': '#C18E4A'
       }
     },
   },

@@ -31,24 +31,39 @@ const Chat = () => {
 
 
    return (
-      <div className=' flex w-[95vw] items-center justify-between flex-wrap ' >
+      <div className=' flex w-[100vw] pl-4 pr-4 items-center justify-between flex-wrap ' >
          <SideMenu />
          <Users />
-         <div className={messageContext.showConversation ? " flex flex-col w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  " : " flex flex-col items-center justify-center w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  "} >
+         <div className={messageContext.showConversation ? " flex flex-col w-[60vw] justify-between bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  " : " flex flex-col items-center justify-center w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]"} >
             {messageContext.showConversation ? <ReceiverUser /> : ''}
-            <div className=' flex flex-col  ' >
+            <div id='scrollBar' className=' flex flex-col  h-[68vh] overflow-x-auto ' >
                {
                   messageContext.userMessages.map((elt, index) => {
-                     return (
-                        <div key={index} className={elt.senderId == localStorage.getItem('userId') ? " flex gap-[0.5vw] self-end mt-2 mb-2" : " flex gap-[0.5vw] self-start mt-2 mb-2"} >
-                           <div className=" flex justify-center items-center w-10 h-10 rounded-full bg-person_background  font-bold text-xl " >
-                              {localStorage.getItem('userName').charAt(0)}
+                     if (elt.senderId == localStorage.getItem('userId')) {
+                        return (
+                           <div key={index} className=" flex gap-[0.5vw] self-end mt-2 mb-2" >
+
+                              <div className=" flex items-center justify-start h-fit  bg-person_background rounded-br-xl rounded-l-xl p-4 max-w-sm box-content text-white text-xs ">
+                                 {elt.message}
+                              </div>
+                              <div className=" flex justify-center items-center w-10 h-10 rounded-full bg-message_background text-white font-bold text-xl " >
+                                 {localStorage.getItem('userName').charAt(0).toUpperCase()}
+                              </div>
                            </div>
-                           <div className=" flex items-center justify-start h-fit  bg-message_background rounded-bl-xl rounded-r-xl p-4 max-w-sm box-content text-white text-xs ">
-                              {elt.message}
+                        )
+                     } else {
+                        return (
+                           <div key={index} className=" flex gap-[0.5vw] self-start mt-2 mb-2" >
+                              <div className=" flex justify-center items-center w-10 h-10 rounded-full bg-person_background  font-bold text-xl " >
+                                 {messageContext.userReceiver.userName.charAt(0).toUpperCase()}
+                              </div>
+                              <div className=" flex items-center justify-start h-fit  bg-message_background rounded-bl-xl rounded-r-xl p-4 max-w-sm box-content text-white text-xs ">
+                                 {elt.message}
+                              </div>
                            </div>
-                        </div>
-                     )
+                        )
+                     }
+
                   })
                }
             </div>
