@@ -6,6 +6,10 @@ import Chat from "./components/chat/chat"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createContext } from "react"
+import io from 'socket.io-client'
+import { useEffect } from "react"
+
+export const socket = io.connect(import.meta.env.VITE_USER_HOST_NAME)
 
 export const MessageContext = createContext()
 
@@ -23,8 +27,9 @@ export const showToastMessage = (message, status) => {
       position: toast.POSITION.BOTTOM_RIGHT
     });
   }
-
 };
+
+
 
 const App = () => {
   const [userName, setUserName] = useState('Josh')
@@ -36,11 +41,17 @@ const App = () => {
   const [userReceiver, setUserReceiver] = useState([])
   const [showConversation, setShowConversation] = useState(false)
 
+  useEffect(() => {
+    socket.on('ioMessages', (data) => {
+      console.log('The io messages ', data);
+      setUserMessages(userMessages.concat(data))
+    })
+  }, [userMessages])
 
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
-        className=" bg-cover bg-black bg-opacity-5 font-normal gap-10 h-[100vh] flex justify-center items-center ">
+        className=" bg-cover bg-black bg-opacity-10 font-normal gap-10 h-[100vh] flex justify-center items-center ">
         <ToastContainer />
         <BrowserRouter>
           <Routes>

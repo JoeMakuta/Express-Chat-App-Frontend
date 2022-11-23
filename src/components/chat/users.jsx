@@ -21,7 +21,8 @@ const users = () => {
       fetch(import.meta.env.VITE_USER_HOST_NAME + '/users', {
          method: 'GET',
          headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
          },
       }).then((data) => data.json())
          .then((data) => {
