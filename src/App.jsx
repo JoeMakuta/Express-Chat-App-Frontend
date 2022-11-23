@@ -3,9 +3,28 @@ import Login from "./components/login/login"
 import Signup from "./components/signup/signup"
 import { Route, BrowserRouter, Routes } from "react-router-dom"
 import Chat from "./components/chat/chat"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { createContext } from "react"
 
 export const MessageContext = createContext()
+
+export const showToastMessage = (message, status) => {
+  if (status == 1) {
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  } else if (status == 2) {
+    toast.error(message, {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  } else if (status == 3) {
+    toast.info(message, {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  }
+
+};
 
 const App = () => {
   const [userName, setUserName] = useState('Josh')
@@ -17,10 +36,12 @@ const App = () => {
   const [userReceiver, setUserReceiver] = useState([])
   const [showConversation, setShowConversation] = useState(false)
 
+
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
         className=" bg-cover bg-black bg-opacity-5 font-normal gap-10 h-[100vh] flex justify-center items-center ">
+        <ToastContainer />
         <BrowserRouter>
           <Routes>
             <Route
