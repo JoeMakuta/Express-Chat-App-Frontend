@@ -41,20 +41,22 @@ const users = () => {
          <div className=' flex flex-col gap-3 ' >
             {
                messageContext.allUsers.map((elt, index) => {
-                  return (
-                     <div key={index} className={elt == messageContext.userReceiver ? "flex  hover:bg-opacity-90 scale-105 cursor-pointer bg-person_background p-4 rounded-lg justify-start gap-3 active:bg-black" : "flex bg-black bg-opacity-10 hover:bg-opacity-20 hover:scale-105 cursor-pointer  p-4 rounded-lg justify-start gap-3"}
-                        onClick={() => {
-                           messageContext.setUserReceiver(elt)
-                           messageContext.setShowConversation(true)
-                           getUserMessages(elt._id);
-                        }}>
-                        <img className=' rounded-full w-10' src={elt.image} />
-                        <div>
-                           <p className=' text-sm font-bold ' >{elt.userName}</p>
-                           <p className=' text-xs ' >{elt.userEmail}</p>
+                  if (!(localStorage.getItem('userId') == elt._id)) {
+                     return (
+                        <div key={index} className={elt == messageContext.userReceiver ? "flex  hover:bg-opacity-90 scale-105 cursor-pointer bg-person_background p-4 rounded-lg justify-start gap-3 active:bg-black" : "flex bg-black bg-opacity-10 hover:bg-opacity-20 hover:scale-105 cursor-pointer  p-4 rounded-lg justify-start gap-3"}
+                           onClick={() => {
+                              messageContext.setUserReceiver(elt)
+                              messageContext.setShowConversation(true)
+                              getUserMessages(elt._id);
+                           }}>
+                           <img className=' rounded-full w-10' src={elt.image} />
+                           <div>
+                              <p className=' text-sm font-bold ' >{elt.userName}</p>
+                              <p className=' text-xs ' >{elt.userEmail}</p>
+                           </div>
                         </div>
-                     </div>
-                  )
+                     )
+                  }
                })
             }
          </div>

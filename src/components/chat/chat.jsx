@@ -31,7 +31,7 @@ const Chat = () => {
 
 
    return (
-      <div className=' flex w-[100vw] pl-8 pr-8 items-center justify-between flex-wrap ' >
+      <div className=' flex w-[100vw] pl-4 pr-4 items-center justify-between flex-wrap ' >
          <SideMenu />
          <Users />
          <div className={messageContext.showConversation ? " flex flex-col w-[60vw] justify-between bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  " : " flex flex-col items-center justify-center w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]"} >

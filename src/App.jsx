@@ -20,7 +20,7 @@ function App() {
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
-        className="font-[Poppins] bg-cover bg-opacity-30 font-normal gap-10 h-[100vh] flex justify-center bg-gray-200 ">
+        className="font-[Poppins] bg-cover bg-opacity-30 font-normal gap-10 h-[100vh] flex justify-center items-center bg-gray-200 ">
         <BrowserRouter>
           <Routes>
             <Route

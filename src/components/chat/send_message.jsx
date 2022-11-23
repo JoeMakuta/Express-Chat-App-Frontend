@@ -38,7 +38,8 @@ const SendMessage = (props) => {
 
    return <div className=" flex gap-3 mt-4 items-center " >
       <input
-         className=" sm:w-[52vw] outline-none  rounded-xl bg-white p-4   "
+      placeholder='Write your message ...'
+         className=" sm:w-[52vw] text-sm outline-none  rounded-xl bg-white p-4   "
          type="text"
          id='messageInput'
          onChange={(e) => {

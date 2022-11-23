@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { useContext } from "react"
 import { useState } from "react"
-import { AiFillQqCircle } from "react-icons/ai"
+import { AiFillEyeInvisible, AiFillEye, AiOutlineEye } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
+
 
 import { MessageContext } from "../../App"
 
@@ -59,38 +60,50 @@ const Login = () => {
          onSubmit={(e) => {
             e.preventDefault()
             loginUser()
-         }} >
-         <div className="flex flex-col  p-6 pt-0 gap-3" >
+         }}>
+         <div className="flex flex-col  p-3 pt-0 gap-3" >
             <p className=" font-bold text-2xl " >User Login</p>
-            <p>Hey, enter your details to get sign in to your account</p>
+            <p className=" text-sm " >Hey, enter your details to get sign in to your account</p>
          </div>
-         {
+         {/* {
             response && <div className={response.status == 200 ? " text-3xl text-green-400 " : " text-3xl text-red-700 "}>
                {response.message}
             </div>
-         }
+         } */}
          <div className="flex flex-col text-start text-sm gap-4 w-full " >
-            <input type="email"
-               required={true}
-               placeholder="Email/Username"
-               className={inputStyles}
-               onChange={(e) => {
-                  messageContext.setUserEmail(e.target.value)
-               }} />
-            <input
-               required={true}
-               type={showPassword ? "text" : "password"}
-               placeholder="Password"
-               className={inputStyles}
-               onChange={(e) => {
-                  messageContext.setUserPassword(e.target.value)
-               }} />
-            <button type="button"
-               onClick={() => {
-                  showPassword ? setShowPassword(false) : setShowPassword(true)
-               }}>
-               {showPassword ? 'Hide' : 'Show'}
-            </button>
+            <div>
+               Email :
+               <input type="email"
+                  required={true}
+                  placeholder="Email/Username"
+                  className={inputStyles}
+                  onChange={(e) => {
+                     messageContext.setUserEmail(e.target.value)
+                  }} />
+            </div>
+            <div>
+
+               Password :
+               <div className={inputStyles + 'flex '}>
+                  <input
+                     required={true}
+                     type={showPassword ? "text" : "password"}
+                     placeholder="Password"
+                     className=" outline-none w-[90%] "
+                     onChange={(e) => {
+                        messageContext.setUserPassword(e.target.value)
+                     }} />
+                  <button type="button"
+                     onClick={() => {
+                        showPassword ? setShowPassword(false) : setShowPassword(true)
+                     }}>
+                     {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
+                  </button>
+               </div>
+
+
+
+            </div>
          </div>
          <div
             className=" flex flex-col gap-3 pt-5 w-full" >
