@@ -7,7 +7,7 @@ import { createContext } from "react"
 
 export const MessageContext = createContext()
 
-function App() {
+const App = () => {
   const [userName, setUserName] = useState('Josh')
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
@@ -20,7 +20,7 @@ function App() {
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
-        className="font-[Poppins] bg-cover bg-opacity-30 font-normal gap-10 h-[100vh] flex justify-center items-center bg-gray-200 ">
+        className=" bg-cover bg-black bg-opacity-5 font-normal gap-10 h-[100vh] flex justify-center items-center ">
         <BrowserRouter>
           <Routes>
             <Route

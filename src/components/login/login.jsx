@@ -2,8 +2,10 @@ import { useEffect } from "react"
 import { useContext } from "react"
 import { useState } from "react"
 import { AiFillEyeInvisible, AiFillEye, AiOutlineEye } from "react-icons/ai"
+import { FaRegUser } from 'react-icons/fa'
 import { Link, useNavigate } from "react-router-dom"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { MessageContext } from "../../App"
 
@@ -17,6 +19,13 @@ const Login = () => {
    const [response, setResponse] = useState({})
    const [authenticated, setAuthenticated] = useState(false)
    const navigate = useNavigate()
+
+   const showToastMessage = () => {
+      console.log('React Toast');
+      toast.success('Success Notification !', {
+         position: toast.POSITION.TOP_RIGHT
+      });
+   };
 
    const loginUser = async () => {
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/login', {
@@ -43,6 +52,7 @@ const Login = () => {
             }
             console.log(data)
             if (data.status == 200) {
+
                navigate('/chat')
             }
          })
@@ -56,23 +66,27 @@ const Login = () => {
    }, [])
 
    return (
-      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit sm:h-[70vh] bg-white bg-opacity-90 text-sm rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
+      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
          onSubmit={(e) => {
             e.preventDefault()
+            showToastMessage()
             loginUser()
          }}>
-         <div className="flex flex-col  p-3 pt-0 gap-3" >
-            <p className=" font-bold text-2xl " >User Login</p>
-            <p className=" text-sm " >Hey, enter your details to get sign in to your account</p>
+
+         <div className="flex flex-col justify-center items-center  p-3 pt-0 gap-3" >
+            <FaRegUser size={60} />
+            <p className=" font-bold text-xl " >User Login</p>
+            <p className=" text-gray-600 text-sm " >Hey, enter your details to get sign in to your account</p>
          </div>
-         {/* {
+         {
             response && <div className={response.status == 200 ? " text-3xl text-green-400 " : " text-3xl text-red-700 "}>
                {response.message}
             </div>
-         } */}
+         }
+
          <div className="flex flex-col text-start text-sm gap-4 w-full " >
             <div>
-               Email :
+
                <input type="email"
                   required={true}
                   placeholder="Email/Username"
@@ -83,7 +97,7 @@ const Login = () => {
             </div>
             <div>
 
-               Password :
+
                <div className={inputStyles + 'flex '}>
                   <input
                      required={true}
@@ -100,9 +114,6 @@ const Login = () => {
                      {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
                   </button>
                </div>
-
-
-
             </div>
          </div>
          <div
@@ -111,7 +122,7 @@ const Login = () => {
                type="submit"
                className=" w-full h-10 rounded-lg bg-orange-400 "
             >
-               SIGN
+               SIGN IN
             </button>
             <p>Don't have an account ?
                <button type="button"
