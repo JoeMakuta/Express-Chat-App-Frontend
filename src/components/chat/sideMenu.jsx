@@ -29,6 +29,7 @@ const sideMenu = () => {
    const logOut = () => {
       localStorage.clear()
       navigate('/')
+      window.location.reload()
    }
 
    return (

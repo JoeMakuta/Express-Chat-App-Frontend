@@ -3,18 +3,13 @@ import { useState } from 'react'
 import { MessageContext } from '../../App'
 import { useContext } from 'react'
 // import { getUserMessages } from './users'
-import { socket } from '../../App'
-
-
+import { socket } from './chat'
 
 const SendMessage = (props) => {
    const messageContext = useContext(MessageContext)
    const [inputMessage, setInputMessage] = useState(null)
 
    const handleSend = async () => {
-
-
-
       await fetch(import.meta.env.VITE_USER_HOST_NAME + '/newMessage', {
          method: 'POST',
          headers: {
@@ -35,13 +30,13 @@ const SendMessage = (props) => {
             receiverId: localStorage.getItem('receiverId'),
             socketId: socket.id
          });
-         // messageContext.setUserMessages(messageContext.userMessages.concat(
-         //    [
-         //       {
-         //          senderId: localStorage.getItem('userId'),
-         //          message: inputMessage
-         //       }
-         //    ]));
+         messageContext.setUserMessages(messageContext.userMessages.concat(
+            [
+               {
+                  senderId: localStorage.getItem('userId'),
+                  message: inputMessage
+               }
+            ]));
       })
 
    }

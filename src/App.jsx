@@ -2,14 +2,11 @@ import { useState } from "react"
 import Login from "./components/login/login"
 import Signup from "./components/signup/signup"
 import { Route, BrowserRouter, Routes } from "react-router-dom"
-import Chat from "./components/chat/chat"
+import Chat, { socket } from "./components/chat/chat"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createContext } from "react"
-import io from 'socket.io-client'
 import { useEffect } from "react"
-
-export const socket = io.connect(import.meta.env.VITE_USER_HOST_NAME)
 
 export const MessageContext = createContext()
 
@@ -42,10 +39,7 @@ const App = () => {
   const [showConversation, setShowConversation] = useState(false)
 
   useEffect(() => {
-    socket.on('ioMessages', (data) => {
-      console.log('The io messages ', data);
-      setUserMessages(userMessages.concat(data))
-    })
+    
   }, [userMessages])
 
   return (

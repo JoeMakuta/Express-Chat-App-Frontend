@@ -7,29 +7,45 @@ import { useNavigate } from 'react-router-dom'
 import Users from './users'
 import SideMenu from './sideMenu'
 import ReceiverUser from './ReceiverUser'
+import io from 'socket.io-client'
 
+const { VITE_USER_HOST_NAME } = import.meta.env
+
+export let socket
 
 const Chat = () => {
    const navigate = useNavigate()
    const messageContext = useContext(MessageContext)
 
+
    useEffect(() => {
-      fetch(import.meta.env.VITE_USER_HOST_NAME + '/getMessages/' + localStorage.getItem('userId'), {
-         method: 'GET',
-         headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-         }
-      }).then(data => data.json())
-         .then(data => {
-            messageContext.setAllMessages(data.messages);
+      if (localStorage.getItem('token')) {
+         fetch(VITE_USER_HOST_NAME + '/getMessages/' + localStorage.getItem('userId'), {
+            method: 'GET',
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+         }).then(data => data.json())
+            .then(data => {
+               messageContext.setAllMessages(data.messages);
+            })
+            .then(() => {
+               console.log('All messages : ', messageContext.allMessages)
+            })
+         socket = io.connect(VITE_USER_HOST_NAME, {
+            auth: {
+               userId: localStorage.getItem('userId')
+            }
          })
-         .then(() => {
-            console.log('All messages : ', messageContext.allMessages)
+         socket.on('ioMessages', (dataMessage) => {
+            console.log('The io messages ', dataMessage);
+            messageContext.setAllMessages(messageContext.allMessages.concat(dataMessage))
          })
-
+      } else {
+         navigate('/')
+      }
    }, [])
-
 
    return (
       <div className=' flex bg-white w-[100vw] pl-4 pr-4 items-center justify-between flex-wrap ' >
