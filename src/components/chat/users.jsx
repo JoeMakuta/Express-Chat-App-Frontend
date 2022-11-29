@@ -34,7 +34,7 @@ const users = () => {
    }, [])
 
    return (
-      <div className="flex flex-col justify-start gap-3 pt-9 pb-10 w-[25vw] h-[100vh] " >
+      <div className="flex flex-col justify-start gap-3 pt-9 pb-10 w-[90vw] sm:w-[25vw] sm:h-[100vh] " >
          <div className=' flex items-center justify-between ' >
             <p className=' font-bold text-lg ' >
                Users

@@ -57,7 +57,7 @@ const Login = () => {
    }, [])
 
    return (
-      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] shadow-2xl "
+      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] sm:shadow-2xl "
          onSubmit={(e) => {
             e.preventDefault()
             loginUser()
