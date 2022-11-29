@@ -3,6 +3,7 @@ import { useCallback, useMemo } from "react"
 import { useContext } from "react"
 import { useState } from "react"
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
+import { FaRegUser } from "react-icons/fa"
 import { Link, useNavigate } from "react-router-dom"
 import { MessageContext } from "../../App"
 import { inputStyles } from "../login/login"
@@ -63,9 +64,10 @@ const Signup = (props) => {
    }
 
    return (
-      <div className=" text-center w-[85vw] sm:w-[30vw] h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col p-[30px] shadow-lg  gap-2  " >
+      <div className=" text-center w-[90vw] sm:w-[30vw] h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col p-[30px] sm:shadow-lg  gap-2  " >
 
          <div className="flex flex-col items-center pt-0 gap-3" >
+            <FaRegUser size={60} />
             <p className=" font-bold text-2xl " >Create Account</p>
             <p className=" w-[80%] text-xs " >Hey, enter your details to get sign up to the Express chat app</p>
          </div>
@@ -128,7 +130,7 @@ const Signup = (props) => {
                />
             </div>
             <button
-               className=" w-full h-10 rounded-lg bg-blue-400 "
+               className=" w-full h-10 rounded-lg bg-orange-400 "
                type="submit"
             >
                SIGNUP
@@ -139,13 +141,16 @@ const Signup = (props) => {
                className="font-['courrier']  text-red-500" >
                Passwords do not match.
             </div>}
-            <p>Have an account ?
+            <p>
+               <p>
+                  Have an account ?
+               </p>
                <button
                   className="ml-3 text-cyan-600"
                   onClick={() => {
                      navigate('/')
                   }}
-                  type='button' > Signin
+                  type='button' >Signin
                </button>
             </p>
          </div>
