@@ -38,14 +38,11 @@ const App = () => {
   const [userReceiver, setUserReceiver] = useState([])
   const [showConversation, setShowConversation] = useState(false)
 
-  useEffect(() => {
-    
-  }, [userMessages])
 
   return (
     <MessageContext.Provider value={{ userName, setUserName, userEmail, setUserEmail, userPassword, setUserPassword, allMessages, setAllMessages, allUsers, setAllUsers, userReceiver, setUserReceiver, showConversation, setShowConversation, userMessages, setUserMessages }} >
       <div
-        className=" bg-cover bg-black bg-opacity-10 font-normal gap-10 h-[100vh] flex justify-center items-center ">
+        className=" bg-cover font-normal h-[100vh] flex justify-center items-center ">
         <ToastContainer />
         <BrowserRouter>
           <Routes>

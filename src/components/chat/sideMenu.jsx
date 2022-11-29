@@ -35,7 +35,7 @@ const sideMenu = () => {
    return (
       <div className=' flex flex-col bg-black  w-24 bg-opacity-10 justify-between items-center h-[100vh] pb-10'>
 
-         <div className=' flex flex-col gap-2 h-[50%] justify-center  ' >
+         <div className=' flex flex-col gap-2 h-[80%] justify-center  ' >
             {
                menuItems.map((elt, index) => {
                   return (

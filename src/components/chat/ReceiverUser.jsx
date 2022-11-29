@@ -20,9 +20,9 @@ const ReceiverUser = () => {
                </div>
             </div>
             <div className=" flex gap-3 items-center justify-center " >
-               <BsTelephone size={15} />
+               {/* <BsTelephone size={15} />
                <BsCameraVideo size={20} />
-               <GoKebabVertical size={20} />
+               <GoKebabVertical size={20} /> */}
             </div>
          </div>
          <div className=" w-full h-[1px] bg-black mt-3 mb-4 bg-opacity-20 " ></div>
