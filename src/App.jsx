@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createContext } from "react";
 import { useEffect } from "react";
+import Home from "./components/main/main";
 
 export const MessageContext = createContext();
 
@@ -61,7 +62,7 @@ const App = () => {
         {/* <ToastContainer /> */}
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/chat" element={<Chat />} />
           </Routes>

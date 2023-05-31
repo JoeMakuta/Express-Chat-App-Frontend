@@ -6,6 +6,8 @@ import { FaRegUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { MessageContext } from "../../App";
 import { inputStyles } from "../login/login";
+import { BsFacebook } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 const Signup = (props) => {
   const messageContext = useContext(MessageContext);
@@ -58,12 +60,20 @@ const Signup = (props) => {
   };
 
   return (
-    <div className=" text-center w-[90vw] sm:w-[30vw] h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col    gap-2  ">
-      <div className="flex flex-col items-center pt-0 gap-3">
-        <p className=" font-bold text-2xl ">Create Account</p>
-        <p className=" w-[80%] text-xs ">
-          Hey, enter your details to get sign up to the Express chat app
+    <div className=" text-center  h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col  gap-2 md:w-[50%]  ">
+      <div className="flex flex-col justify-center items-center  pt-0 gap-3">
+        <p className=" font-medium text-4xl ">Create an account!</p>
+        <p className=" text-gray-600 text-xs ">
+          Enter your details to create your account
         </p>
+      </div>
+      <div className=" flex justify-around gap-4 ">
+        <div className="bg-slate-100 w-[5rem] cursor-pointer h-9 flex justify-center items-center rounded-2xl">
+          <BsFacebook color="#0001EB" size={15} />
+        </div>
+        <div className="bg-slate-100 w-[5rem] h-9 cursor-pointer flex justify-center items-center rounded-2xl">
+          <FcGoogle size={15} />
+        </div>
       </div>
       <div
         className={
@@ -83,43 +93,44 @@ const Signup = (props) => {
             : null;
         }}
       >
-        <div className="flex gap-3 items-center justify-between ">
+        <div className="flex gap-2 flex-col items-start justify-between ">
           <p>Name :</p>
           <input
             type="text"
             placeholder="Username"
             required={true}
-            className={inputStyles + "w-[60%]"}
+            className={inputStyles}
             onChange={(e) => {
               handleUserName(e.target.value);
             }}
           />
         </div>
-        <div className="flex  gap-3 items-center justify-between">
+        <div className="flex  gap-2 flex-col items-start justify-between">
           <p>Email :</p>
           <input
             type="email"
             placeholder="makutajosue@gmail.com"
             required={true}
-            className={inputStyles + "w-[60%]"}
+            className={inputStyles}
             onChange={(e) => {
               handleUserEmail(e.target.value);
             }}
           />
         </div>
-        <div className="flex  gap-3 items-center justify-between">
+        <div className="flex relative  gap-2 items-start flex-col justify-between">
           <p>Password :</p>
-          <div className={inputStyles + "w-[60%] flex items-center "}>
+          <div className=" w-full ">
             <input
               type={showPassword ? "text" : "password"}
               required={true}
               placeholder="Password"
-              className=" outline-none w-[90%] "
+              className={inputStyles + "min-w-full"}
               onChange={(e) => {
                 handleUserPassword(e.target.value);
               }}
             />
             <button
+              className="absolute bottom-2 right-5 "
               type="button"
               onClick={() => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);
@@ -133,22 +144,22 @@ const Signup = (props) => {
             </button>
           </div>
         </div>
-        <div className="flex  gap-3 items-center justify-between">
+        <div className="flex  gap-2 flex-col items-start justify-between">
           <p>Repeat Password :</p>
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            className={inputStyles + "w-[60%]"}
+            className={inputStyles}
             onChange={(e) => {
               setRepeatPassword(e.target.value);
             }}
           />
         </div>
         <button
-          className=" w-full h-10 rounded-lg bg-orange-400 "
           type="submit"
+          className=" w-full text-base h-10 rounded-lg bg-main_color hover:bg-main_color/50 transition-all duration-500 font-bold text-white active:bg-black "
         >
-          SIGNUP
+          Sign up
         </button>
       </form>
       <div className=" flex flex-col gap-3 pt-5 mb-4 w-full">
@@ -157,19 +168,19 @@ const Signup = (props) => {
             Passwords do not match.
           </div>
         )}
-        <p>
-          <p>Have an account ?</p>
-          <button
-            className="ml-3 text-cyan-600"
-            onClick={() => {
-              navigate("/");
-            }}
-            type="button"
-          >
-            Signin
-          </button>
-        </p>
       </div>
+      <p className=" flex gap-2 text-base">
+        <p>Have an account ?</p>
+        <button
+          type="button"
+          className="text-main_color font-bold"
+          onClick={() => {
+            props.setLogin((login) => !login);
+          }}
+        >
+          Signin
+        </button>
+      </p>
     </div>
   );
 };
