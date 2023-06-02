@@ -17,7 +17,7 @@ import { BsFacebook } from "react-icons/bs";
 import Signup from "../signup/signup";
 
 export const inputStyles =
-  " h-10 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all ";
+  " h-10 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
 
 const Login = ({ login, setLogin }) => {
   const messageContext = useContext(MessageContext);

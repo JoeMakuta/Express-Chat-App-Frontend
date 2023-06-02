@@ -61,7 +61,7 @@ const Signup = (props) => {
 
   return (
     <div className=" text-center  h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col  gap-2 md:w-[50%]  ">
-      <div className="flex flex-col justify-center items-center  pt-0 gap-3">
+      <div className="flex flex-col justify-center items-center  pt-0 gap-1">
         <p className=" font-medium text-4xl ">Create an account!</p>
         <p className=" text-gray-600 text-xs ">
           Enter your details to create your account
@@ -85,7 +85,7 @@ const Signup = (props) => {
         {successMessage}
       </div>
       <form
-        className="flex flex-col text-start text-sm gap-4 w-full "
+        className="flex flex-col text-start text-sm gap-2 w-full "
         onSubmit={(e) => {
           e.preventDefault();
           passWordMatched(messageContext.userPassword, repeatPassword)
@@ -157,7 +157,7 @@ const Signup = (props) => {
         </div>
         <button
           type="submit"
-          className=" w-full text-base h-10 rounded-lg bg-main_color hover:bg-main_color/50 transition-all duration-500 font-bold text-white active:bg-black "
+          className=" w-full text-base h-10 rounded-lg bg-main_color hover:bg-main_color/50 transition-all duration-500 font-bold text-white active:bg-black mt-6"
         >
           Sign up
         </button>
