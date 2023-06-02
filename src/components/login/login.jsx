@@ -1,126 +1,166 @@
-import { useEffect } from "react"
-import { useContext } from "react"
-import { useState } from "react"
-import { AiFillEyeInvisible, AiFillEye, AiOutlineEye } from "react-icons/ai"
-import { FaRegUser } from 'react-icons/fa'
-import { Link, useNavigate } from "react-router-dom"
-import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
+import { useContext } from "react";
+import { useState } from "react";
+import {
+  AiFillEyeInvisible,
+  AiFillEye,
+  AiOutlineEye,
+  AiOutlineUser,
+} from "react-icons/ai";
+import { FaRegUser } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { Link, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
-import { MessageContext, showToastMessage } from "../../App"
+import { MessageContext, showToastMessage } from "../../App";
+import { BsFacebook } from "react-icons/bs";
+import Signup from "../signup/signup";
 
-export const inputStyles = " h-10 p-3 w-[100%] border-[1px] border-gray-400 rounded-lg outline-none "
+export const inputStyles =
+  " h-10 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
 
-const Login = () => {
-   const messageContext = useContext(MessageContext)
+const Login = ({ login, setLogin }) => {
+  const messageContext = useContext(MessageContext);
 
-   const [showPassword, setShowPassword] = useState(false)
-   const [response, setResponse] = useState({})
-   const [authenticated, setAuthenticated] = useState(false)
-   const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false);
+  const [response, setResponse] = useState({});
+  const [authenticated, setAuthenticated] = useState(false);
+  const navigate = useNavigate();
 
-   const loginUser = async () => {
-      await fetch(import.meta.env.VITE_USER_HOST_NAME + '/login', {
-         method: 'POST',
-         headers: {
-            "Content-Type": "application/json"
-         },
-         body: JSON.stringify(
-            {
-               "userEmail": messageContext.userEmail,
-               "passWord": messageContext.userPassword
-            }
-         )
-      }).then(data => data.json())
-         .then((data) => {
-            setResponse(data)
-            console.log(data);
-            if (data.token) {
-               localStorage.setItem('token', data.token)
-               localStorage.setItem('userId', data.user._id)
-               localStorage.setItem('userName', data.user.userName)
-               localStorage.setItem('userEmail', data.user.userEmail)
-               localStorage.setItem('imageUrl', data.user.image)
-            }
-            console.log(data)
-            if (data.status == 200) {
-               navigate('/chat')
-            }
-         })
-   }
+  const loginUser = async () => {
+    await fetch(import.meta.env.VITE_USER_HOST_NAME + "/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userEmail: messageContext.userEmail,
+        passWord: messageContext.userPassword,
+      }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        setResponse(data);
+        console.log(data);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("userId", data.user._id);
+          localStorage.setItem("userName", data.user.userName);
+          localStorage.setItem("userEmail", data.user.userEmail);
+          localStorage.setItem("imageUrl", data.user.image);
+        }
+        if (data.status == 200) {
+          navigate("/chat");
+        }
+      });
+  };
 
-   useEffect(() => {
-      const token = localStorage.getItem("token")
-      if (token) {
-         showToastMessage('Logged as ' + localStorage.getItem('userName'), 3)
-         navigate('/chat')
-      }
-   }, [])
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      showToastMessage("Logged as " + localStorage.getItem("userName"), 3);
+      navigate("/chat");
+    }
+  }, []);
 
-   return (
-      <form className=" backdrop-blur-md text-center w-[85vw] sm:w-[25vw] h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col p-[30px] sm:shadow-2xl "
-         onSubmit={(e) => {
-            e.preventDefault()
-            loginUser()
-         }}>
+  return (
+    <form
+      className=" backdrop-blur-md text-center  shadow-gray-400  h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col gap-4 w-[85%] transition-all md:w-[50%] "
+      onSubmit={(e) => {
+        e.preventDefault();
+        // loginUser();
+      }}
+    >
+      <div className="flex flex-col justify-center items-center  pt-0 gap-3">
+        <p className=" font-medium text-4xl ">Welcome back!</p>
+        <p className=" text-gray-600 text-xs ">
+          Enter your credentials to access your account
+        </p>
+      </div>
+      <div className=" flex justify-around gap-4 ">
+        <div className="bg-slate-100 w-[5rem] cursor-pointer h-9 flex justify-center items-center rounded-2xl">
+          <BsFacebook color="#0001EB" size={15} />
+        </div>
+        <div className="bg-slate-100 w-[5rem] h-9 cursor-pointer flex justify-center items-center rounded-2xl">
+          <FcGoogle size={15} />
+        </div>
+      </div>
 
-         <div className="flex flex-col justify-center items-center  p-3 pt-0 gap-3" >
-            <FaRegUser size={60} />
-            <p className=" font-bold text-xl " >User Login</p>
-            <p className=" text-gray-600 text-sm " >Hey, enter your details to get sign in to your account</p>
-         </div>
-         {/* {
-            response && showToastMessage(response.message, 2)
-         } */}
-
-         <div className="flex flex-col text-start text-sm gap-4 w-full " >
-            <div>
-
-               <input type="email"
-                  required={true}
-                  placeholder="Email/Username"
-                  className={inputStyles}
-                  onChange={(e) => {
-                     messageContext.setUserEmail(e.target.value)
-                  }} />
-            </div>
-            <div>
-
-
-               <div className={inputStyles + 'flex '}>
-                  <input
-                     required={true}
-                     type={showPassword ? "text" : "password"}
-                     placeholder="Password"
-                     className=" outline-none w-[90%] "
-                     onChange={(e) => {
-                        messageContext.setUserPassword(e.target.value)
-                     }} />
-                  <button type="button"
-                     onClick={() => {
-                        showPassword ? setShowPassword(false) : setShowPassword(true)
-                     }}>
-                     {showPassword ? <AiFillEyeInvisible size={20} /> : <AiFillEye size={20} />}
-                  </button>
-               </div>
-            </div>
-         </div>
-         <div
-            className=" flex flex-col gap-3 pt-5 w-full" >
+      <div className="flex flex-col text-start text-sm gap-4 w-full ">
+        <div className=" flex flex-col gap-2 ">
+          {/* <label htmlFor="">Email :</label> */}
+          <input
+            type="email"
+            required={true}
+            placeholder="Email"
+            className={inputStyles}
+            onChange={(e) => {
+              messageContext.setUserEmail(e.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <div className=" flex gap-2 flex-col ">
+            {/* <label htmlFor="">Password : </label> */}
+            <input
+              required={true}
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              className={inputStyles + " min-w-full"}
+              onChange={(e) => {
+                messageContext.setUserPassword(e.target.value);
+              }}
+            />
             <button
-               type="submit"
-               className=" w-full h-10 rounded-lg bg-orange-400 active:bg-black "
+              className="relative self-end bottom-9 right-4"
+              type="button"
+              onClick={() => {
+                showPassword ? setShowPassword(false) : setShowPassword(true);
+              }}
             >
-               SIGN IN
+              {showPassword ? (
+                <AiFillEyeInvisible size={20} />
+              ) : (
+                <AiFillEye size={20} />
+              )}
             </button>
-            <p>Don't have an account ?
-               <button type="button"
-                  className="text-cyan-600" >
-                  <Link to='/signup'> Signup</Link>
-               </button>
-            </p>
-         </div>
-      </form >
-   )
-}
+          </div>
+        </div>
+        <div className=" flex justify-between  ">
+          <div className="flex cursor-pointer gap-2">
+            <input
+              className=" w-5 bg-main_color"
+              type="checkbox"
+              name="logged"
+              id="logged"
+            />
+            <label htmlFor="logged">Keep me logged ?</label>
+          </div>
+          <p className=" text-main_color cursor-pointer">Forgot password?</p>
+        </div>
+      </div>
+      <div className=" flex flex-col justify-center items-center gap-5  w-full">
+        <button
+          type="submit"
+          className=" w-full text-base h-10 rounded-lg bg-main_color hover:bg-main_color/50 transition-all duration-500 font-bold text-white active:bg-black "
+        >
+          Login
+        </button>
+        <p className=" flex gap-2 text-base">
+          <p>Don't have an account ?</p>
+          <button
+            type="button"
+            onClick={() => {
+              setLogin((login) => !login);
+            }}
+            className="text-main_color font-bold "
+          >
+            Signup
+          </button>
+        </p>
+      </div>
+    </form>
+  );
+};
 
-export default Login
+export default Login;

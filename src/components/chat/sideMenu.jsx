@@ -33,9 +33,9 @@ const sideMenu = () => {
    }
 
    return (
-      <div className=' flex flex-col bg-black  w-24 bg-opacity-10 justify-between items-center h-[100vh] pb-10'>
+      <div className=' flex fixed sm:relative bottom-0 sm:flex-col bg-black w-full sm:w-24 bg-opacity-10 justify-between items-center h-fit sm:h-[100vh] pb-10'>
 
-         <div className=' flex flex-col gap-2 h-[80%] justify-center  ' >
+         <div className=' flex sm:flex-col gap-2 sm:h-[80%]  justify-center  ' >
             {
                menuItems.map((elt, index) => {
                   return (
@@ -51,12 +51,12 @@ const sideMenu = () => {
             }
          </div>
 
-         <div className=' flex justify-center items-center flex-col gap-10 ' >
+         <div className='hidden sm:flex justify-center items-center sm:flex-col sm:gap-10 ' >
             {/* <VscAccount
                className='cursor-pointer'
                size={30}
                color='#000000' /> */}
-            <div className=' flex  flex-col gap-3 justify-center items-center pt-6 ' >
+            <div className=' flex  flex-col gap-3 justify-center items-center sm:pt-6 ' >
                <img className=' rounded-full w-10 ' src={localStorage.getItem('imageUrl')} alt="" />
                <div className=' text-center leading-5 font-bold ' >{localStorage.getItem('userName')}
                </div>

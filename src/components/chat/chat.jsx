@@ -33,7 +33,6 @@ const AllMessages = () => {
                )
             )
          }
-
       })
    }, [])
 
@@ -85,7 +84,7 @@ const Chat = () => {
       <div className=' flex bg-white w-[100vw] pl-2 sm:pl-4 sm:pr-4 items-center justify-between flex-wrap ' >
          <SideMenu />
          <Users />
-         <div className={messageContext.showConversation ? " flex flex-col w-[96vw]  sm:w-[60vw] justify-between bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  " : " flex flex-col items-center justify-center w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]"} >
+         <div className={messageContext.showConversation ? " flex flex-col w-[96vw]  sm:w-[60vw] justify-between bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]  " : "hidden sm:flex flex-col items-center justify-center w-[60vw] bg-black bg-opacity-10 p-5 pt-2 rounded-lg h-[95vh]"} >
             {messageContext.showConversation ? <ReceiverUser /> : ''}
             <AllMessages />
             {messageContext.showConversation ? <SendMessage /> : <p className=' font-extralight text-xs ' >No Conversation</p>}

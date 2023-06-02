@@ -14,7 +14,7 @@ const SendMessage = (props) => {
          method: 'POST',
          headers: {
             "Content-Type": "application/json",
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
+            'Authorization': "Bearer " + localStorage.getItem('token')
          },
          body: JSON.stringify(
             {
@@ -61,7 +61,7 @@ const SendMessage = (props) => {
          className=" flex items-center justify-center rounded-full h-12 w-12 bg-person_background active:bg-message_background "
          onClick={(e) => {
             handleSend();
-            document.getElementById('messageInput').value = ''
+            document.getElementById('messageInput').value = ''  
          }} >
          <AiOutlineSend size={20} color='#ffffff' />
       </button>
