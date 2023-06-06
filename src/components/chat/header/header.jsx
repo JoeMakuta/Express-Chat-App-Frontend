@@ -1,0 +1,23 @@
+import { GoBell } from "react-icons/go";
+import SearchBar from "./searchBar";
+import User from "./user";
+import { HiOutlineBell } from "react-icons/hi";
+import { VscBell } from "react-icons/vsc";
+import Menu from "./menu";
+
+const Header = () => {
+  return (
+    <section className="flex justify-between px-10 max-w-[1400px] items-center h-[60px] min-h-[60px] bg-slate-800 w-full text-white fixed z-20">
+      <div>
+        <Menu />
+      </div>
+      <div className=" flex gap-2 justify-center items-center ">
+        <SearchBar />
+        {/* <VscBell size={25} /> */}
+        <User />
+      </div>
+    </section>
+  );
+};
+
+export default Header;
