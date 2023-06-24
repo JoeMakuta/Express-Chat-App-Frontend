@@ -1,6 +1,6 @@
 const User = () => {
   return (
-    <div className=" w-10 cursor-pointer relative h-10   ">
+    <div className=" w-12 cursor-pointer relative h-12   ">
       <img
         src="https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg"
         alt=""

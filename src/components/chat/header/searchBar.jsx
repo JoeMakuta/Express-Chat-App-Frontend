@@ -3,7 +3,7 @@ import { inputStyles } from "../../login/login";
 
 const SearchBar = () => {
   return (
-    <div className=" flex justify-center items-center relative gap-2  outline-none ">
+    <div className="hidden sm:flex justify-center items-center relative gap-2  outline-none ">
       <BiSearchAlt size={20} className=" left-1 absolute text-white/30 " />
       <input
         type="text"

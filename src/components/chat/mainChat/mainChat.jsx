@@ -4,7 +4,7 @@ import MessageType from "./messageType";
 
 const MainChat = () => {
   return (
-    <section className="relative text-sm w-[50%]">
+    <section className="hidden sm:flex flex-col relative text-sm w-[75%]">
       <HeaderChat />
       <MessagesChatting />
       <MessageType />

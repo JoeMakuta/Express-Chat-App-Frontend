@@ -8,6 +8,8 @@ import { MessageContext } from "../../App";
 import { inputStyles } from "../login/login";
 import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 const Signup = (props) => {
   const messageContext = useContext(MessageContext);
@@ -39,28 +41,45 @@ const Signup = (props) => {
   };
 
   const insert_data = async () => {
-    await fetch(import.meta.env.VITE_USER_HOST_NAME + "/signup", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userName: messageContext.userName,
-        userEmail: messageContext.userEmail,
-        passWord: messageContext.userPassword,
-      }),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        console.log(data);
-        setSuccessMessage(data.message);
-        setResponseStatus(data.status);
-      });
+    try {
+      toast.promise(
+        axios.post(
+          import.meta.env.VITE_USER_HOST_NAME + "/signup",
+          {
+            userName: messageContext.userName,
+            userEmail: messageContext.userEmail,
+            passWord: messageContext.userPassword,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        ),
+        {
+          loading: "Trying",
+          error: (err) => {
+            return `${err?.response?.data?.message}`;
+          },
+          success: ({ data }) => {
+            return `${data?.message}`;
+          },
+        },
+        {
+          className: "rounded-none bg-black/90 text-white",
+          position: "bottom-center",
+        }
+      );
+    } catch (error) {
+      toast.error(error?.message);
+    }
   };
 
   return (
-    <div className=" text-center  h-fit sm:h-fit bg-white text-sm rounded-3xl flex items-center justify-center flex-col  gap-2 md:w-[50%]  ">
+    <div className=" text-center  h-fit sm:h-fit  text-sm rounded-3xl flex items-center justify-center flex-col  gap-2 w-[85%] md:w-[50%]  ">
+      <div>
+        <Toaster />
+      </div>
       <div className="flex flex-col justify-center items-center  pt-0 gap-1">
         <p className=" font-medium text-4xl ">Create an account!</p>
         <p className=" text-gray-600 text-xs ">
@@ -130,16 +149,16 @@ const Signup = (props) => {
               }}
             />
             <button
-              className="absolute bottom-2 right-5 "
+              className="absolute bottom-[12px] right-5 "
               type="button"
               onClick={() => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);
               }}
             >
               {showPassword ? (
-                <AiFillEyeInvisible size={20} />
+                <AiFillEyeInvisible size={25} />
               ) : (
-                <AiFillEye size={20} />
+                <AiFillEye size={25} />
               )}
             </button>
           </div>

@@ -3,8 +3,6 @@ import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import Chat from "./components/chat/chat";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { createContext } from "react";
 import { useEffect } from "react";
 import Home from "./components/main/main";
