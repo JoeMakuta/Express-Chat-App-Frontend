@@ -43,15 +43,18 @@ const Login = ({ login, setLogin }) => {
       {
         error: (err) => {
           console.log(err);
-          return `Error : ${err?.response?.data?.message}`;
+          return `${err?.response?.data?.message}`;
         },
         loading: `Loading ...`,
         success: (data) => {
           console.log(data);
-          return `Data`;
+          return `Welcom ${data?.data.user?.fName} ${data?.data.user?.lName} !`;
         },
       },
-      {}
+      {
+        className: "rounded-none bg-black/90 text-white",
+        position: "bottom-center",
+      }
     );
   };
 
