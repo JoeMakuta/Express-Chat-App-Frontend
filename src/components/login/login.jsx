@@ -9,7 +9,7 @@ import {
 } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { MessageContext, showToastMessage } from "../../App";
 import { BsFacebook } from "react-icons/bs";
 import Signup from "../signup/signup";
@@ -46,9 +46,12 @@ const Login = ({ login, setLogin }) => {
           return `${err?.response?.data?.message}`;
         },
         loading: `Loading ...`,
-        success: (data) => {
+        success: ({ data }) => {
           console.log(data);
-          return `Welcom ${data?.data.user?.fName} ${data?.data.user?.lName} !`;
+          delete data.user.passWord;
+          localStorage.setItem("currentUser", JSON.stringify(data?.user));
+          navigate("/chat");
+          return `Welcom ${data.user?.fName} ${data.user?.lName} !`;
         },
       },
       {

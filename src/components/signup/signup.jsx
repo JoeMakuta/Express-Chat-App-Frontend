@@ -62,6 +62,7 @@ const Signup = (props) => {
             return `${err?.response?.data?.message}`;
           },
           success: ({ data }) => {
+            // setLogin((login) => !login);
             return `${data?.message}`;
           },
         },
