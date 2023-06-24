@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <div className=" w-screen flex justify-center bg-gradient-to-tr from-main_color/30 to-white items-center h-screen">
-      <div className="max-w-[1500px] bg-white max-h-[820px] h-full w-full max-w-screen xl:flex justify-around  items-center ">
+      <div className="max-w-[1500px] bg-white max-h-screen sm:bg-none  bg-gradient-to-tr from-main_color/20 to-white h-full w-full max-w-screen md:max-h-[900px] xl:flex justify-around  items-center ">
         <div className=" w-full md:w-[50%] h-full flex justify-center items-center ">
           {login ? (
             <Login login={login} setLogin={setLogin} />

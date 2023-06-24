@@ -9,50 +9,56 @@ import {
 } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
-
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { MessageContext, showToastMessage } from "../../App";
 import { BsFacebook } from "react-icons/bs";
 import Signup from "../signup/signup";
+import toast, { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 export const inputStyles =
-  " h-10 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
+  " h-12 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
 
 const Login = ({ login, setLogin }) => {
   const messageContext = useContext(MessageContext);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [response, setResponse] = useState({});
   const [authenticated, setAuthenticated] = useState(false);
   const navigate = useNavigate();
 
   const loginUser = async () => {
-    await fetch(import.meta.env.VITE_USER_HOST_NAME + "/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userEmail: messageContext.userEmail,
-        passWord: messageContext.userPassword,
-      }),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        setResponse(data);
-        console.log(data);
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("userId", data.user._id);
-          localStorage.setItem("userName", data.user.userName);
-          localStorage.setItem("userEmail", data.user.userEmail);
-          localStorage.setItem("imageUrl", data.user.image);
+    toast.promise(
+      axios.post(
+        import.meta.env.VITE_USER_HOST_NAME + "/login",
+        {
+          userEmail: messageContext.userEmail,
+          passWord: messageContext.userPassword,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        if (data.status == 200) {
+      ),
+      {
+        error: (err) => {
+          console.log(err);
+          return `${err?.response?.data?.message}`;
+        },
+        loading: `Loading ...`,
+        success: ({ data }) => {
+          console.log(data);
+          delete data.user.passWord;
+          localStorage.setItem("currentUser", JSON.stringify(data?.user));
           navigate("/chat");
-        }
-      });
+          return `Welcom ${data.user?.fName} ${data.user?.lName} !`;
+        },
+      },
+      {
+        className: "rounded-none bg-black/90 text-white",
+        position: "bottom-center",
+      }
+    );
   };
 
   useEffect(() => {
@@ -65,12 +71,14 @@ const Login = ({ login, setLogin }) => {
 
   return (
     <form
-      className=" backdrop-blur-md text-center  shadow-gray-400  h-fit  bg-white bg-opacity-30 text-xs rounded-3xl flex items-center justify-around flex-col gap-4 w-[85%] transition-all md:w-[50%] "
+      className=" backdrop-blur-md text-center  shadow-gray-400  h-fit text-xs rounded-3xl flex items-center justify-around flex-col gap-4 w-[85%] transition-all md:w-[50%] "
       onSubmit={(e) => {
         e.preventDefault();
-        // loginUser();
+        loginUser();
       }}
     >
+      <Toaster />
+
       <div className="flex flex-col justify-center items-center  pt-0 gap-3">
         <p className=" font-medium text-4xl ">Welcome back!</p>
         <p className=" text-gray-600 text-xs ">
@@ -112,16 +120,16 @@ const Login = ({ login, setLogin }) => {
               }}
             />
             <button
-              className="relative self-end bottom-9 right-4"
+              className="relative self-end bottom-[42px] right-4"
               type="button"
               onClick={() => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);
               }}
             >
               {showPassword ? (
-                <AiFillEyeInvisible size={20} />
+                <AiFillEyeInvisible size={25} />
               ) : (
-                <AiFillEye size={20} />
+                <AiFillEye size={25} />
               )}
             </button>
           </div>

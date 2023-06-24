@@ -2,9 +2,7 @@ import { useState } from "react";
 import Login from "./components/login/login";
 import Signup from "./components/signup/signup";
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import Chat, { socket } from "./components/chat/chat";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Chat from "./components/chat/chat";
 import { createContext } from "react";
 import { useEffect } from "react";
 import Home from "./components/main/main";
@@ -58,7 +56,7 @@ const App = () => {
         setUserMessages,
       }}
     >
-      <main className="flex items-center font-mainFont  justify-center h-screen ">
+      <main className="flex items-center font-mainFont  justify-center min-h-sreen h-[100vh] ">
         {/* <ToastContainer /> */}
         <BrowserRouter>
           <Routes>
