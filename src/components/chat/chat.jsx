@@ -4,10 +4,15 @@ import LeftBar from "./leftbar/leftBar";
 import MainChat from "./mainChat/mainChat";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (!currentUser) {
+      navigate("/");
+    }
   }, []);
 
   return (
