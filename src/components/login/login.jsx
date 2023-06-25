@@ -62,9 +62,9 @@ const Login = ({ login, setLogin }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      showToastMessage("Logged as " + localStorage.getItem("userName"), 3);
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      //Login the currentUser
       navigate("/chat");
     }
   }, []);
