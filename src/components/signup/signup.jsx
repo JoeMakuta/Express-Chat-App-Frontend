@@ -11,7 +11,7 @@ import { FcGoogle } from "react-icons/fc";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
-const Signup = (props) => {
+const Signup = ({ login, setLogin }) => {
   const messageContext = useContext(MessageContext);
 
   const [matchedPWD, setMatchedPWD] = useState(false);
@@ -62,7 +62,7 @@ const Signup = (props) => {
             return `${err?.response?.data?.message}`;
           },
           success: ({ data }) => {
-            // setLogin((login) => !login);
+            setLogin((login) => !login);
             return `${data?.message}`;
           },
         },
