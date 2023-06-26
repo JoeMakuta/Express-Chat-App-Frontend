@@ -59,7 +59,7 @@ const Signup = ({ login, setLogin }) => {
         {
           loading: "Trying",
           error: (err) => {
-            return `${err?.response?.data?.message}`;
+            return `${err?.response?.data?.message || err?.message}`;
           },
           success: ({ data }) => {
             setLogin((login) => !login);

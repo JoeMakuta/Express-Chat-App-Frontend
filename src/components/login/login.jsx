@@ -43,7 +43,7 @@ const Login = ({ login, setLogin }) => {
       {
         error: (err) => {
           console.log(err);
-          return `${err?.response?.data?.message}`;
+          return `${err?.response?.data?.message || err?.message}`;
         },
         loading: `Loading ...`,
         success: ({ data }) => {
@@ -77,9 +77,8 @@ const Login = ({ login, setLogin }) => {
         loginUser();
       }}
     >
-      <Toaster />
-
       <div className="flex flex-col justify-center items-center  pt-0 gap-3">
+        <Toaster />
         <p className=" font-medium text-4xl ">Welcome back!</p>
         <p className=" text-gray-600 text-xs ">
           Enter your credentials to access your account
@@ -137,12 +136,14 @@ const Login = ({ login, setLogin }) => {
         <div className=" flex justify-between  ">
           <div className="flex cursor-pointer gap-2">
             <input
-              className=" w-5 bg-main_color"
+              className=" w-5 bg-main_color cursor-pointer"
               type="checkbox"
               name="logged"
               id="logged"
             />
-            <label htmlFor="logged">Keep me logged ?</label>
+            <label htmlFor="logged" className="cursor-pointer">
+              Keep me logged ?
+            </label>
           </div>
           <p className=" text-main_color cursor-pointer">Forgot password?</p>
         </div>
