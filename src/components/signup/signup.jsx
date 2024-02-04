@@ -195,7 +195,7 @@ const Signup = ({ login, setLogin }) => {
           type="button"
           className="text-main_color font-bold"
           onClick={() => {
-            props.setLogin((login) => !login);
+            setLogin((login) => !login);
           }}
         >
           Signin
