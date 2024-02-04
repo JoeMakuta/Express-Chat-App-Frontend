@@ -2,10 +2,14 @@ import { BiSearchAlt } from "react-icons/bi";
 import SearchBar from "../header/searchBar";
 import { inputStyles } from "../../login/login";
 import User from "../header/user";
-
-const messages = [{}];
+import { useState } from "react";
+import axios from "axios";
 
 const LeftBar = () => {
+  const [conversations, setConversations] = useState({});
+  const getConversation = async () => {
+    const response = await axios.get();
+  };
   return (
     <section className=" border-r-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
       <div className=" flex w-[90%] self-center justify-center items-center relative gap-2  outline-none ">
@@ -26,146 +30,6 @@ const LeftBar = () => {
             <div>
               <p className=" font-bold  ">Josué Makuta</p>
               <p className=" text-sm text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-sm text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-sm text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
-            </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-xs text-slate-500 ">You : Hello My bro !</p>
             </div>
           </div>
           <p className=" text-xs text-slate-500  ">11:00 AM</p>

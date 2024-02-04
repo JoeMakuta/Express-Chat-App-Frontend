@@ -59,7 +59,7 @@ const Signup = ({ login, setLogin }) => {
         {
           loading: "Trying",
           error: (err) => {
-            return `${err?.response?.data?.message}`;
+            return `${err?.response?.data?.message || err?.message}`;
           },
           success: ({ data }) => {
             setLogin((login) => !login);
@@ -195,7 +195,7 @@ const Signup = ({ login, setLogin }) => {
           type="button"
           className="text-main_color font-bold"
           onClick={() => {
-            props.setLogin((login) => !login);
+            setLogin((login) => !login);
           }}
         >
           Signin
