@@ -77,8 +77,10 @@ const Login = ({ login, setLogin }) => {
         loginUser();
       }}
     >
-      <div className="flex flex-col justify-center items-center  pt-0 gap-3">
+      {/* <div>
         <Toaster />
+      </div> */}
+      <div className="flex flex-col justify-center items-center  pt-0 gap-3">
         <p className=" font-medium text-4xl ">Welcome back!</p>
         <p className=" text-gray-600 text-xs ">
           Enter your credentials to access your account
