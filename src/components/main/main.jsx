@@ -2,6 +2,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import Login from "../login/login";
 import Signup from "../signup/signup";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 const Home = () => {
   const [login, setLogin] = useState(true);
@@ -15,6 +16,9 @@ const Home = () => {
           ) : (
             <Signup login={login} setLogin={setLogin} />
           )}
+        </div>
+        <div>
+          <Toaster />
         </div>
         {/* <Signup /> */}
         <div className="hidden w-[50%] xl:flex justify-center items-center overflow-hidden relative bg-main_color/50 h-full rounded-tl-[40%] ">
