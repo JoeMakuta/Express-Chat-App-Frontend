@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { ApiCall } from "../../helpers/api";
 import { useContext } from "react";
 import { MessageContext } from "../../App";
+import NoMessage from "./mainChat/noMessage";
 
 const Chat = () => {
   const navigate = useNavigate();
-  const { allUsers, setAllUsers } = useContext(MessageContext);
+  const { allUsers, setAllUsers, currentConversation } =
+    useContext(MessageContext);
 
   const getUsers = async (currentUser) => {
     try {
@@ -41,13 +43,14 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className=" w-screen flex justify-center bg-gradient-to-tr from-main_color/30 to-white items-center h-full">
+    <div className=" w-screen flex justify-center bg-gradient-to-tr from-main_color/10 to-white items-center h-full">
       <Toaster />
-      <div className="max-w-[1500px] bg-white max-h-[100vh] h-full w-full max-w-screen flex  flex-col  ">
+      <div className="max-w-[1500px]  max-h-[100vh] h-full w-full max-w-screen flex  flex-col  ">
         <Header />
         <main className=" flex h-full  justify-start md:pt-[60px] pt-[80px] ">
           <LeftBar />
-          <MainChat />
+          {currentConversation ? <MainChat /> : <NoMessage />}
+
           {/* <LeftBar /> */}
         </main>
       </div>

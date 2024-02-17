@@ -14,7 +14,7 @@ const LeftBar = () => {
     const response = await axios.get();
   };
   return (
-    <section className=" border-r-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
+    <section className=" border-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
       <div className=" flex w-[90%] self-center justify-center items-center relative gap-2  outline-none ">
         <BiSearchAlt size={20} className=" left-3 absolute text-black/30 " />
         <input
@@ -27,9 +27,12 @@ const LeftBar = () => {
         />
       </div>
       <div id="style-4" className="  w-full flex flex-col overflow-x-scroll  ">
-        {allUsers?.map((el) => {
+        {allUsers?.map((el, index) => {
           return (
-            <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
+            <div
+              key={index}
+              className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full "
+            >
               <div className=" flex gap-4 justify-center  ">
                 <User />
                 <div>
