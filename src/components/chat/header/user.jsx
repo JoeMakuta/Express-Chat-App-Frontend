@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { MessageContext } from "../../../App";
+
 const User = () => {
   return (
     <div className=" w-12 cursor-pointer relative h-12   ">

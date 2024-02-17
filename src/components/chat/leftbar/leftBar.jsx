@@ -4,8 +4,11 @@ import { inputStyles } from "../../login/login";
 import User from "../header/user";
 import { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { MessageContext } from "../../../App";
 
 const LeftBar = () => {
+  const { allUsers, setAllUsers } = useContext(MessageContext);
   const [conversations, setConversations] = useState({});
   const getConversation = async () => {
     const response = await axios.get();
@@ -24,16 +27,22 @@ const LeftBar = () => {
         />
       </div>
       <div id="style-4" className="  w-full flex flex-col overflow-x-scroll  ">
-        <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
-          <div className=" flex gap-4 justify-center  ">
-            <User />
-            <div>
-              <p className=" font-bold  ">Josué Makuta</p>
-              <p className=" text-sm text-slate-500 ">You : Hello My bro !</p>
+        {allUsers?.map((el) => {
+          return (
+            <div className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full ">
+              <div className=" flex gap-4 justify-center  ">
+                <User />
+                <div>
+                  <p className=" font-bold  ">{el?.userName}</p>
+                  <p className=" text-sm text-slate-500 ">
+                    You : Hello My bro !
+                  </p>
+                </div>
+              </div>
+              <p className=" text-xs text-slate-500  ">11:00 AM</p>
             </div>
-          </div>
-          <p className=" text-xs text-slate-500  ">11:00 AM</p>
-        </div>
+          );
+        })}
       </div>
     </section>
   );

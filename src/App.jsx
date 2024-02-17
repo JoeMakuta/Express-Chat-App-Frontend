@@ -34,10 +34,22 @@ const App = () => {
   const [allUsers, setAllUsers] = useState([]);
   const [userReceiver, setUserReceiver] = useState([]);
   const [showConversation, setShowConversation] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const user = localStorage.getItem("currentUser");
+    user ?? setCurrentUser(user);
+  }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  // }, [currentUser]);
 
   return (
     <MessageContext.Provider
       value={{
+        currentUser,
+        setCurrentUser,
         userName,
         setUserName,
         userEmail,
