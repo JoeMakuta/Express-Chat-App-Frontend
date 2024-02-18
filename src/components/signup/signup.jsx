@@ -10,9 +10,12 @@ import { BsFacebook } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import { useEffect } from "react";
 
 const Signup = ({ login, setLogin }) => {
   const messageContext = useContext(MessageContext);
+
+  const [userSignUp, setUserSignUp] = useState({});
 
   const [matchedPWD, setMatchedPWD] = useState(false);
   const [repeatPassword, setRepeatPassword] = useState(false);
@@ -21,15 +24,12 @@ const Signup = ({ login, setLogin }) => {
   const [responseStatus, setResponseStatus] = useState(200);
   const navigate = useNavigate();
 
-  const handleUserName = (e) => {
-    messageContext.setUserName(e);
+  const handleSignUp = (propertie, value) => {
+    const copyUser = { ...userSignUp };
+    copyUser[propertie] = value;
+    setUserSignUp(copyUser);
   };
-  const handleUserEmail = (e) => {
-    messageContext.setUserEmail(e);
-  };
-  const handleUserPassword = (e) => {
-    messageContext.setUserPassword(e);
-  };
+
   const passWordMatched = (passWord1, passWord2) => {
     if (passWord1 == passWord2) {
       setMatchedPWD(false);
@@ -46,9 +46,7 @@ const Signup = ({ login, setLogin }) => {
         axios.post(
           import.meta.env.VITE_USER_HOST_NAME + "/signup",
           {
-            userName: messageContext.userName,
-            userEmail: messageContext.userEmail,
-            passWord: messageContext.userPassword,
+            ...userSignUp,
           },
           {
             headers: {
@@ -87,14 +85,14 @@ const Signup = ({ login, setLogin }) => {
           Enter your details to create your account
         </p>
       </div>
-      <div className=" flex justify-around gap-4 ">
+      {/* <div className=" flex justify-around gap-4 ">
         <div className="bg-slate-100 w-[5rem] cursor-pointer h-9 flex justify-center items-center rounded-2xl">
           <BsFacebook color="#0001EB" size={15} />
         </div>
         <div className="bg-slate-100 w-[5rem] h-9 cursor-pointer flex justify-center items-center rounded-2xl">
           <FcGoogle size={15} />
         </div>
-      </div>
+      </div> */}
       <div
         className={
           responseStatus == 403
@@ -113,6 +111,32 @@ const Signup = ({ login, setLogin }) => {
             : null;
         }}
       >
+        <div className=" flex gap-2">
+          <div className="flex gap-3 flex-col items-start justify-between ">
+            <p>First Name :</p>
+            <input
+              type="text"
+              placeholder="First name"
+              required={true}
+              className={inputStyles}
+              onChange={(e) => {
+                handleSignUp("fName", e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex gap-2 flex-col items-start justify-between ">
+            <p>Last Name :</p>
+            <input
+              type="text"
+              placeholder="Last name"
+              required={true}
+              className={inputStyles}
+              onChange={(e) => {
+                handleSignUp("lName", e.target.value);
+              }}
+            />
+          </div>
+        </div>
         <div className="flex gap-2 flex-col items-start justify-between ">
           <p>Name :</p>
           <input
@@ -121,7 +145,7 @@ const Signup = ({ login, setLogin }) => {
             required={true}
             className={inputStyles}
             onChange={(e) => {
-              handleUserName(e.target.value);
+              handleSignUp("userName", e.target.value);
             }}
           />
         </div>
@@ -133,7 +157,7 @@ const Signup = ({ login, setLogin }) => {
             required={true}
             className={inputStyles}
             onChange={(e) => {
-              handleUserEmail(e.target.value);
+              handleSignUp("userEmail", e.target.value);
             }}
           />
         </div>
@@ -146,11 +170,11 @@ const Signup = ({ login, setLogin }) => {
               placeholder="Password"
               className={inputStyles + "min-w-full"}
               onChange={(e) => {
-                handleUserPassword(e.target.value);
+                handleSignUp("passWord", e.target.value);
               }}
             />
             <button
-              className="absolute bottom-[12px] right-5 "
+              className="absolute bottom-[6px] right-5 "
               type="button"
               onClick={() => {
                 showPassword ? setShowPassword(false) : setShowPassword(true);

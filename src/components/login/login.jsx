@@ -17,7 +17,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 export const inputStyles =
-  " h-12 p-3 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-2 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
+  " h-10 p-2 w-[100%] bg-slate-200 focus:border-[1px]   rounded-lg outline-none focus:ring-[#00BDD6FF]/30 focus:ring-1 focus:shadow-[0px_0px_10px_1px_#00BDD6FF] border-[1px] border-[#000]/10 transition-all flex justify-center items-center ";
 
 const Login = ({ login, setLogin }) => {
   const messageContext = useContext(MessageContext);
@@ -47,10 +47,10 @@ const Login = ({ login, setLogin }) => {
         },
         loading: `Loading ...`,
         success: ({ data }) => {
-          console.log(data);
           delete data.user.passWord;
-          localStorage.setItem("currentUser", JSON.stringify(data?.user));
+          localStorage.setItem("currentUser", JSON.stringify(data));
           navigate("/chat");
+          messageContext.setCurrentUser(data.user);
           return `Welcom ${data.user?.fName} ${data.user?.lName} !`;
         },
       },
@@ -77,23 +77,20 @@ const Login = ({ login, setLogin }) => {
         loginUser();
       }}
     >
-      {/* <div>
-        <Toaster />
-      </div> */}
       <div className="flex flex-col justify-center items-center  pt-0 gap-3">
         <p className=" font-medium text-4xl ">Welcome back!</p>
         <p className=" text-gray-600 text-xs ">
           Enter your credentials to access your account
         </p>
       </div>
-      <div className=" flex justify-around gap-4 ">
+      {/* <div className=" flex justify-around gap-4 ">
         <div className="bg-slate-100 w-[5rem] cursor-pointer h-9 flex justify-center items-center rounded-2xl">
           <BsFacebook color="#0001EB" size={15} />
         </div>
         <div className="bg-slate-100 w-[5rem] h-9 cursor-pointer flex justify-center items-center rounded-2xl">
           <FcGoogle size={15} />
         </div>
-      </div>
+      </div> */}
 
       <div className="flex flex-col text-start text-sm gap-4 w-full ">
         <div className=" flex flex-col gap-2 ">

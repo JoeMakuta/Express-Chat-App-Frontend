@@ -5,13 +5,38 @@ import MainChat from "./mainChat/mainChat";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { ApiCall } from "../../helpers/api";
+import { useContext } from "react";
+import { MessageContext } from "../../App";
 
 const Chat = () => {
   const navigate = useNavigate();
+  const { allUsers, setAllUsers } = useContext(MessageContext);
+
+  const getUsers = async (currentUser) => {
+    try {
+      const { data } = await ApiCall.get({
+        url: "/users",
+        token: currentUser.token,
+      });
+      if (data.users) {
+        setAllUsers(data?.users);
+      }
+
+      console.log(data?.users);
+    } catch (error) {
+      console.log(error);
+      // localStorage.clear();
+      // navigate("/");
+    }
+  };
+
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (!currentUser) {
       navigate("/");
+    } else {
+      getUsers(currentUser);
     }
   }, []);
 
