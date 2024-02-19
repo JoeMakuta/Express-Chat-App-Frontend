@@ -17,7 +17,7 @@ const LeftBar = () => {
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const getOrCreateConversation = async (userId) => {
-    if (userId !== currentConversation.members[1]._id) {
+    if (currentConversation && userId != currentConversation.members[1]._id) {
       try {
         toast.promise(
           ApiCall.post({
@@ -34,6 +34,7 @@ const LeftBar = () => {
             },
             error: (err) => {
               console.log(err);
+              return err.response.data.message;
             },
           },
           {
