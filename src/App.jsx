@@ -33,7 +33,7 @@ const App = () => {
   const [userMessages, setUserMessages] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [userReceiver, setUserReceiver] = useState([]);
-  const [showConversation, setShowConversation] = useState(false);
+  const [currentConversation, setCurrentConversation] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
@@ -48,6 +48,8 @@ const App = () => {
   return (
     <MessageContext.Provider
       value={{
+        currentConversation,
+        setCurrentConversation,
         currentUser,
         setCurrentUser,
         userName,
@@ -62,8 +64,6 @@ const App = () => {
         setAllUsers,
         userReceiver,
         setUserReceiver,
-        showConversation,
-        setShowConversation,
         userMessages,
         setUserMessages,
       }}
