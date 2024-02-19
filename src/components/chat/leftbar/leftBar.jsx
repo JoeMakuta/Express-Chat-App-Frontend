@@ -6,12 +6,27 @@ import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { MessageContext } from "../../../App";
+import { ApiCall } from "../../../helpers/api";
 
 const LeftBar = () => {
-  const { allUsers, setAllUsers } = useContext(MessageContext);
+  const { allUsers, setAllUsers, currentConversation, setCurrentConversation } =
+    useContext(MessageContext);
   const [conversations, setConversations] = useState({});
-  const getConversation = async () => {
-    const response = await axios.get();
+
+  const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
+
+  const getOrCreateConversation = async (userId) => {
+    try {
+      const { data } = await ApiCall.post({
+        url: "/newConversation",
+        data: { users: [user._id, userId] },
+        token,
+      });
+      console.log(data);
+      setCurrentConversation(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <section className=" border-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
@@ -27,25 +42,28 @@ const LeftBar = () => {
         />
       </div>
       <div id="style-4" className="  w-full flex flex-col overflow-x-scroll  ">
-        {allUsers?.map((el, index) => {
-          return (
-            <div
-              key={index}
-              className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full "
-            >
-              <div className=" flex gap-4 justify-center  ">
-                <User />
-                <div>
-                  <p className=" font-bold  ">{el?.userName}</p>
-                  <p className=" text-sm text-slate-500 ">
-                    You : Hello My bro !
-                  </p>
+        {allUsers
+          ?.filter((elt) => elt.userName !== user?.userName)
+          .map((el, index) => {
+            return (
+              <div
+                key={index}
+                onClick={() => getOrCreateConversation(el._id)}
+                className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full "
+              >
+                <div className=" flex gap-4 justify-center  ">
+                  <User />
+                  <div>
+                    <p className=" font-bold  ">{el?.userName}</p>
+                    <p className=" text-sm text-slate-500 ">
+                      You : Hello My bro !
+                    </p>
+                  </div>
                 </div>
+                <p className=" text-xs text-slate-500  ">11:00 AM</p>
               </div>
-              <p className=" text-xs text-slate-500  ">11:00 AM</p>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </section>
   );

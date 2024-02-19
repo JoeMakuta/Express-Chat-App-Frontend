@@ -28,8 +28,8 @@ const Chat = () => {
       console.log(data?.users);
     } catch (error) {
       console.log(error);
-      // localStorage.clear();
-      // navigate("/");
+      localStorage.clear();
+      navigate("/");
     }
   };
 
