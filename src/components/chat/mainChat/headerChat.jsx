@@ -7,7 +7,12 @@ import { useEffect } from "react";
 
 const HeaderChat = () => {
   const messageContext = useContext(MessageContext);
-  const { currentUser, setCurrentUser } = messageContext;
+  const {
+    currentUser,
+    setCurrentUser,
+    currentConversation,
+    setCurrentConversation,
+  } = messageContext;
 
   useEffect(() => {
     setCurrentUser(localStorage.getItem("currentUser"));
@@ -19,7 +24,7 @@ const HeaderChat = () => {
         <User />
         <div>
           <p className=" text-base font-bold  ">
-            {currentUser?.fName} {currentUser?.lName}
+            {currentConversation?.members[1]?.userName}
           </p>
           <p className="text-slate-500 ">Active Now</p>
         </div>

@@ -7,6 +7,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { MessageContext } from "../../../App";
 import { ApiCall } from "../../../helpers/api";
+import { toast } from "react-hot-toast";
 
 const LeftBar = () => {
   const { allUsers, setAllUsers, currentConversation, setCurrentConversation } =
@@ -16,16 +17,33 @@ const LeftBar = () => {
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const getOrCreateConversation = async (userId) => {
-    try {
-      const { data } = await ApiCall.post({
-        url: "/newConversation",
-        data: { users: [user._id, userId] },
-        token,
-      });
-      console.log(data);
-      setCurrentConversation(data);
-    } catch (error) {
-      console.log(error);
+    if (userId !== currentConversation.members[1]._id) {
+      try {
+        toast.promise(
+          ApiCall.post({
+            url: "/newConversation",
+            data: { users: [user._id, userId] },
+            token,
+          }),
+          {
+            loading: `Loading ...`,
+            success: ({ data }) => {
+              console.log(data);
+              setCurrentConversation(data);
+              return `Done !`;
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          },
+          {
+            className: "rounded-none bg-black/90 text-white",
+            position: "bottom-center",
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   return (

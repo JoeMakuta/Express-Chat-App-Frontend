@@ -1,6 +1,6 @@
 const NoMessage = () => {
   return (
-    <div className=" w-full flex justify-center items-center ">
+    <div className=" w-[75%] hidden sm:flex justify-center items-center ">
       No Conversation.
     </div>
   );
