@@ -4,12 +4,16 @@ import { MessageContext } from "../../../App";
 import { useState } from "react";
 
 const MessageType = () => {
+  const [writtenText, setWrittenText] = useState("");
+  const [sendingMessage, setSendingMessage] = useState(false);
+
   const { currentConversation, setCurrentConversation } =
     useContext(MessageContext);
-  const [writtenText, setWrittenText] = useState("");
+
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const SendMessage = async (e) => {
+    setSendingMessage(true);
     e.preventDefault();
     try {
       const { data } = await ApiCall.post({
@@ -22,26 +26,33 @@ const MessageType = () => {
     } catch (error) {
       console.log(error);
     }
+    setSendingMessage(false);
   };
 
   return (
     <form
       onSubmit={SendMessage}
-      className="flex justify-center items-center absolute bottom-0 border-t-[1px] w-full h-[12%] border-black/10 gap-2 "
+      className="flex bg-gray-100 justify-center items-center absolute bottom-0 border-t-[1px] w-full h-[12%] border-black/10 gap-2 "
     >
-      <input
+      <textarea
         value={writtenText}
         type="text"
         className=" outline-none bg-black/10 w-[85%] h-10 rounded-md p-3 "
         placeholder="Type your message ... "
         required
+        pattern="^(?=.*[^\s]).+$"
         onChange={(e) => setWrittenText(e.target.value)}
       />
       <button
         type="submit"
-        className=" w-[10%] text-xs text-white bg-main_color h-10 rounded-md "
+        disabled={sendingMessage}
+        className="flex items-center justify-center w-[10%] text-xs text-white bg-main_color h-10 rounded-md "
       >
-        Send
+        {sendingMessage ? (
+          <div class="border-gray-300 h-5 w-5 animate-spin rounded-full border-2 border-t-main_color" />
+        ) : (
+          "Send"
+        )}
       </button>
     </form>
   );

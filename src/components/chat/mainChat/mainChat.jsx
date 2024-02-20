@@ -10,7 +10,7 @@ const MainChat = () => {
   return chatLoading ? (
     <GlobalLoader size={10} />
   ) : (
-    <section className="hidden sm:flex flex-col relative text-sm w-[75%]">
+    <section className="hidden sm:flex flex-col relative text-sm w-full">
       <HeaderChat />
       <MessagesChatting />
       <MessageType />
