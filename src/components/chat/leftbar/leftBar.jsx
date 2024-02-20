@@ -10,42 +10,34 @@ import { ApiCall } from "../../../helpers/api";
 import { toast } from "react-hot-toast";
 
 const LeftBar = () => {
-  const { allUsers, setAllUsers, currentConversation, setCurrentConversation } =
-    useContext(MessageContext);
-  const [conversations, setConversations] = useState({});
+  const {
+    allUsers,
+    setAllUsers,
+    currentConversation,
+    setCurrentConversation,
+    chatLoading,
+    setChatLoading,
+  } = useContext(MessageContext);
 
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const getOrCreateConversation = async (userId) => {
-    if (currentConversation && userId != currentConversation.members[1]._id) {
-      try {
-        toast.promise(
-          ApiCall.post({
-            url: "/newConversation",
-            data: { users: [user._id, userId] },
-            token,
-          }),
-          {
-            loading: `Loading ...`,
-            success: ({ data }) => {
-              console.log(data);
-              setCurrentConversation(data);
-              return `Done !`;
-            },
-            error: (err) => {
-              console.log(err);
-              return err.response.data.message;
-            },
-          },
-          {
-            className: "rounded-none bg-black/90 text-white",
-            position: "bottom-center",
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
+    setChatLoading(true);
+    // if (currentConversation && userId != currentConversation.members[1]._id) {
+    try {
+      const { data } = await ApiCall.post({
+        url: "/newConversation",
+        data: { users: [user._id, userId] },
+        token,
+      });
+
+      console.log(data);
+      setCurrentConversation(data);
+    } catch (error) {
+      console.log(error);
     }
+    // }
+    setChatLoading(false);
   };
   return (
     <section className=" border-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">

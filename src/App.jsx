@@ -35,6 +35,7 @@ const App = () => {
   const [userReceiver, setUserReceiver] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [chatLoading, setChatLoading] = useState(false);
 
   useEffect(() => {
     const user = localStorage.getItem("currentUser");
@@ -66,6 +67,8 @@ const App = () => {
         setUserReceiver,
         userMessages,
         setUserMessages,
+        chatLoading,
+        setChatLoading,
       }}
     >
       <main className="flex items-center font-mainFont  justify-center min-h-sreen h-[100vh] ">
