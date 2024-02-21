@@ -9,13 +9,22 @@ import { ApiCall } from "../../helpers/api";
 import { useContext } from "react";
 import { MessageContext } from "../../App";
 import NoMessage from "./mainChat/noMessage";
+import { useState } from "react";
+import GlobalLoader from "../loader/global";
 
 const Chat = () => {
   const navigate = useNavigate();
-  const { allUsers, setAllUsers, currentConversation } =
-    useContext(MessageContext);
+  const [loading, setLoading] = useState(true);
+  const {
+    allUsers,
+    setAllUsers,
+    currentConversation,
+    chatLoading,
+    setChatLoading,
+  } = useContext(MessageContext);
 
   const getUsers = async (currentUser) => {
+    setLoading(true);
     try {
       const { data } = await ApiCall.get({
         url: "/users",
@@ -26,9 +35,11 @@ const Chat = () => {
       }
 
       console.log(data?.users);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       localStorage.clear();
+      setLoading(false);
       navigate("/");
     }
   };
@@ -42,20 +53,32 @@ const Chat = () => {
     }
   }, []);
 
-  return (
-    <div className=" w-screen flex justify-center bg-gradient-to-tr from-main_color/10 to-white items-center h-full">
-      <Toaster />
-      <div className="max-w-[1500px]  max-h-[100vh] h-full w-full max-w-screen flex  flex-col  ">
-        <Header />
-        <main className=" flex h-full  justify-start md:pt-[60px] pt-[80px] ">
-          <LeftBar />
-          {currentConversation ? <MainChat /> : <NoMessage />}
+  {
+    return loading ? (
+      <GlobalLoader />
+    ) : (
+      <div className=" w-screen flex justify-center bg-gradient-to-tr from-main_color/10 to-white items-center h-full">
+        <div className="max-w-[1500px]  max-h-[100vh] h-full w-full max-w-screen flex  flex-col  ">
+          <Header />
+          <main className=" flex h-full  justify-start md:pt-[60px] pt-[80px] ">
+            <LeftBar />
+            {currentConversation ? (
+              <MainChat />
+            ) : chatLoading ? (
+              <GlobalLoader size={10} />
+            ) : (
+              <NoMessage />
+            )}
 
-          {/* <LeftBar /> */}
-        </main>
+            {/* <LeftBar /> */}
+          </main>
+        </div>
+        <div>
+          <Toaster />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Chat;

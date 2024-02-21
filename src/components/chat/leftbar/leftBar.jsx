@@ -7,26 +7,37 @@ import axios from "axios";
 import { useContext } from "react";
 import { MessageContext } from "../../../App";
 import { ApiCall } from "../../../helpers/api";
+import { toast } from "react-hot-toast";
 
 const LeftBar = () => {
-  const { allUsers, setAllUsers, currentConversation, setCurrentConversation } =
-    useContext(MessageContext);
-  const [conversations, setConversations] = useState({});
+  const {
+    allUsers,
+    setAllUsers,
+    currentConversation,
+    setCurrentConversation,
+    chatLoading,
+    setChatLoading,
+  } = useContext(MessageContext);
 
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const getOrCreateConversation = async (userId) => {
+    setChatLoading(true);
+    // if (currentConversation && userId != currentConversation.members[1]._id) {
     try {
       const { data } = await ApiCall.post({
         url: "/newConversation",
         data: { users: [user._id, userId] },
         token,
       });
+
       console.log(data);
       setCurrentConversation(data);
     } catch (error) {
       console.log(error);
     }
+    // }
+    setChatLoading(false);
   };
   return (
     <section className=" border-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
