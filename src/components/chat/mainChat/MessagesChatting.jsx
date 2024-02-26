@@ -41,9 +41,9 @@ const MessagesChatting = () => {
     <div className="overflow-y-scroll flex flex-col gap-4 p-3 w-full">
       {currentMessages.map((elt, index) => {
         return elt.senderId == user._id ? (
-          <Message1 message={elt.body} />
+          <Message1 key={index} message={elt.body} />
         ) : (
-          <Message message={elt.body} />
+          <Message key={index} message={elt.body} />
         );
       })}
     </div>
