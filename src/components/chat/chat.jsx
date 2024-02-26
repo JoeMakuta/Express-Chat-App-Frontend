@@ -19,8 +19,8 @@ const Chat = () => {
     allUsers,
     setAllUsers,
     currentConversation,
-    chatLoading,
-    setChatLoading,
+    userReceiver,
+    setUserReceiver,
   } = useContext(MessageContext);
 
   const getUsers = async (currentUser) => {
@@ -62,13 +62,7 @@ const Chat = () => {
           <Header />
           <main className=" flex h-full  justify-start md:pt-[60px] pt-[80px] ">
             <LeftBar />
-            {currentConversation ? (
-              <MainChat />
-            ) : chatLoading ? (
-              <GlobalLoader size={10} />
-            ) : (
-              <NoMessage />
-            )}
+            {userReceiver ? <MainChat /> : <NoMessage />}
 
             {/* <LeftBar /> */}
           </main>

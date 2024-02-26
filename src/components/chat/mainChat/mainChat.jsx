@@ -2,8 +2,6 @@ import { useContext } from "react";
 import MessagesChatting from "./MessagesChatting";
 import HeaderChat from "./headerChat";
 import MessageType from "./messageType";
-import { MessageContext } from "../../../App";
-import GlobalLoader from "../../loader/global";
 
 const MainChat = () => {
   return (

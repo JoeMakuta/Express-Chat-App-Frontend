@@ -63,7 +63,9 @@ const LeftBar = () => {
               <div
                 key={index}
                 onClick={() => getOrCreateConversation(el)}
-                className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full "
+                className={` ${
+                  userReceiver._id == el._id ? "bg-black/10" : ""
+                } flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full `}
               >
                 <div className=" flex gap-4 justify-center  ">
                   <User />
