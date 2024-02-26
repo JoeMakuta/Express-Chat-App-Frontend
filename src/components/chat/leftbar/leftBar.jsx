@@ -17,17 +17,20 @@ const LeftBar = () => {
     setCurrentConversation,
     chatLoading,
     setChatLoading,
+    userReceiver,
+    setUserReceiver,
   } = useContext(MessageContext);
 
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
-  const getOrCreateConversation = async (userId) => {
+  const getOrCreateConversation = async (clickedUser) => {
+    setUserReceiver(clickedUser);
     setChatLoading(true);
     // if (currentConversation && userId != currentConversation.members[1]._id) {
     try {
       const { data } = await ApiCall.post({
         url: "/newConversation",
-        data: { users: [user._id, userId] },
+        data: { users: [user._id, clickedUser._id] },
         token,
       });
 
@@ -59,7 +62,7 @@ const LeftBar = () => {
             return (
               <div
                 key={index}
-                onClick={() => getOrCreateConversation(el._id)}
+                onClick={() => getOrCreateConversation(el)}
                 className=" flex cursor-pointer hover:bg-black/10  transition-all delay-150 justify-between py-4 px-4   gap-4  w-full "
               >
                 <div className=" flex gap-4 justify-center  ">

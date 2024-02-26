@@ -4,9 +4,10 @@ import { MessageContext } from "../../../App";
 import { useEffect } from "react";
 import { ApiCall } from "../../../helpers/api";
 import { Message, Message1 } from "../message";
+import GlobalLoader from "../../loader/global";
 
 const MessagesChatting = () => {
-  const [loadingMessages, setLoadingMessages] = useState(false);
+  const { chatLoading, setChatLoading } = useContext(MessageContext);
 
   const {
     currentConversation,
@@ -18,7 +19,7 @@ const MessagesChatting = () => {
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const LoadMessages = async () => {
-    setLoadingMessages(true);
+    setChatLoading(true);
 
     try {
       const { data } = await ApiCall.get({
@@ -30,14 +31,16 @@ const MessagesChatting = () => {
     } catch (error) {
       console.log(error);
     }
-    setLoadingMessages(false);
+    setChatLoading(false);
   };
 
   useEffect(() => {
     LoadMessages();
   }, [currentConversation]);
 
-  return (
+  return chatLoading ? (
+    <GlobalLoader size={10} />
+  ) : (
     <div className="overflow-y-scroll flex flex-col gap-4 p-3 w-full">
       {currentMessages.map((elt, index) => {
         return elt.senderId == user._id ? (

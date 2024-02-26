@@ -12,6 +12,8 @@ const HeaderChat = () => {
     setCurrentUser,
     currentConversation,
     setCurrentConversation,
+    userReceiver,
+    setUserReceiver,
   } = messageContext;
 
   useEffect(() => {
@@ -23,9 +25,7 @@ const HeaderChat = () => {
       <div className=" flex gap-4">
         <User />
         <div>
-          <p className=" text-base font-bold  ">
-            {currentConversation?.members[1]?.userName}
-          </p>
+          <p className=" text-base font-bold  ">{userReceiver.userName}</p>
           <p className="text-slate-500 ">Active Now</p>
         </div>
       </div>
