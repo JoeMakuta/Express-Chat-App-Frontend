@@ -32,7 +32,7 @@ const App = () => {
   const [allMessages, setAllMessages] = useState([]);
   const [userMessages, setUserMessages] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  const [userReceiver, setUserReceiver] = useState([]);
+  const [userReceiver, setUserReceiver] = useState(null);
   const [currentConversation, setCurrentConversation] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [chatLoading, setChatLoading] = useState(false);
