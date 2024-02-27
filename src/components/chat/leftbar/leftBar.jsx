@@ -43,7 +43,7 @@ const LeftBar = () => {
     setChatLoading(false);
   };
   return (
-    <section className="resize-x border-[1px] border-black/10 flex flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
+    <section className=" border-[1px] border-black/10 flex  flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
       <div className=" flex w-[90%] self-center justify-center items-center relative gap-2  outline-none ">
         <BiSearchAlt size={20} className=" left-3 absolute text-black/30 " />
         <input
