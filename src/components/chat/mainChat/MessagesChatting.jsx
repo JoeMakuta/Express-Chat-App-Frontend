@@ -39,14 +39,16 @@ const MessagesChatting = () => {
   }, [currentConversation]);
 
   return chatLoading ? (
-    <GlobalLoader size={10} />
+    <div className=" flex w-full h-full justify-center items-center ">
+      <GlobalLoader size={10} />
+    </div>
   ) : (
-    <div className="overflow-y-scroll flex flex-col gap-4 p-3 w-full">
+    <div className="overflow-y-scroll flex flex-col gap-4 h-[73%] p-3 w-full">
       {currentMessages.map((elt, index) => {
         return elt.senderId == user._id ? (
-          <Message1 key={index} message={elt.body} />
+          <Message1 key={index} message={elt.body} user={elt.senderId} />
         ) : (
-          <Message key={index} message={elt.body} />
+          <Message key={index} message={elt.body} user={elt.senderId} />
         );
       })}
     </div>

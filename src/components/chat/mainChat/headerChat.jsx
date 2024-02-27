@@ -25,7 +25,9 @@ const HeaderChat = () => {
       <div className=" flex gap-4">
         <User />
         <div>
-          <p className=" text-base font-bold  ">{userReceiver.userName}</p>
+          <p className=" text-base font-bold  ">
+            {userReceiver.fName} {userReceiver.lName}
+          </p>
           <p className="text-slate-500 ">Active Now</p>
         </div>
       </div>

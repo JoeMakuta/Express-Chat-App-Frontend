@@ -32,7 +32,7 @@ const MessageType = () => {
   return (
     <form
       onSubmit={SendMessage}
-      className="flex bg-gray-100 justify-center items-center absolute bottom-0 border-t-[1px] w-full h-[12%] border-black/10 gap-2 "
+      className="flex bg-gray-100 justify-start  absolute bottom-0 border-t-[1px] w-full h-fit min-h-[12%] p-2 border-black/10 gap-2 "
     >
       <textarea
         value={writtenText}
