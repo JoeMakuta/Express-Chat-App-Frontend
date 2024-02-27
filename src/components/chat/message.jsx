@@ -3,7 +3,7 @@ import { MessageContext } from "../../App";
 
 export const Message = ({ message, user }) => {
   return (
-    <div className=" flex w-full gap-2 self-end">
+    <div className=" flex w-full gap-2 place-items-start">
       <div className=" flex justify-center items-center w-10 h-10 rounded-full bg-message_background text-white font-bold text-xl ">
         {user[0]}
       </div>

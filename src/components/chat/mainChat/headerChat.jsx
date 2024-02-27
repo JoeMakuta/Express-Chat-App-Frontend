@@ -4,6 +4,7 @@ import User from "../header/user";
 import { MessageContext } from "../../../App";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { BiArrowBack } from "react-icons/bi";
 
 const HeaderChat = () => {
   const messageContext = useContext(MessageContext);
@@ -22,7 +23,8 @@ const HeaderChat = () => {
 
   return (
     <div className=" h-[15%] min-h-[70px] border-b-[1px] flex gap-4 border-black/10 w-full  justify-between  items-center px-5">
-      <div className=" flex gap-4">
+      <div className=" flex items-center gap-4">
+        <BiArrowBack size={20} className=" cursor-pointer block sm:hidden " />
         <User />
         <div>
           <p className=" text-base font-bold  ">
