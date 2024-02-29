@@ -40,7 +40,7 @@ const LeftBar = () => {
       console.log(error);
     }
     // }
-    setChatLoading(false);
+    // setChatLoading(false);
   };
   return (
     <section className=" border-[1px] border-black/10 flex  flex-col justify-start items-start pt-4  min-h-full w-full sm:w-[25%] min-w-[300px] gap-3 ">
