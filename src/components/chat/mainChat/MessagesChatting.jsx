@@ -43,14 +43,20 @@ const MessagesChatting = () => {
       <GlobalLoader size={10} />
     </div>
   ) : (
-    <div className="overflow-y-scroll flex flex-col gap-4 h-[73%] p-3 w-full">
-      {currentMessages.map((elt, index) => {
-        return elt.senderId == user._id ? (
-          <Message1 key={index} message={elt.body} user={elt.senderId} />
-        ) : (
-          <Message key={index} message={elt.body} user={elt.senderId} />
-        );
-      })}
+    <div className="overflow-y-scroll flex flex-col  items-center gap-4 h-[73%] p-3 w-full">
+      {currentMessages.length !== 0 ? (
+        currentMessages.map((elt, index) => {
+          return elt?.senderId?._id == user._id ? (
+            <Message1 key={index} message={elt.body} user={elt.senderId} />
+          ) : (
+            <Message key={index} message={elt.body} user={elt.senderId} />
+          );
+        })
+      ) : (
+        <div className=" w-full h-full flex justify-center items-center ">
+          No message in this conversation!
+        </div>
+      )}
     </div>
   );
 };
