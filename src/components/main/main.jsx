@@ -3,6 +3,8 @@ import Login from "../login/login";
 import Signup from "../signup/signup";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import Image1 from "../../assets/Image 2341.png";
+import Line from "../../assets/line.png";
 
 const Home = () => {
   const [login, setLogin] = useState(true);
@@ -40,13 +42,9 @@ const Home = () => {
               <p className=" text-black/30 ">Talents</p>
             </div>
           </div>
+          <img src={Image1} className=" absolute bottom-0 w-[60%]" alt="" />
           <img
-            src="/src/assets/Image 2341.png"
-            className=" absolute bottom-0 w-[60%]"
-            alt=""
-          />
-          <img
-            src="/src/assets/line.png"
+            src={Line}
             className=" w-full z-10 absolute bottom-0 scale-125 "
             alt=""
           />

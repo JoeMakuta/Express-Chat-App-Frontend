@@ -34,7 +34,7 @@ const LeftBar = () => {
         token,
       });
 
-      console.log(data);
+      // console.log(data);
       setCurrentConversation(data);
     } catch (error) {
       console.log(error);
