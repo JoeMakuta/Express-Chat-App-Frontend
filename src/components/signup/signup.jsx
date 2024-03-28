@@ -31,6 +31,7 @@ const Signup = ({ login, setLogin }) => {
   };
 
   const passWordMatched = (passWord1, passWord2) => {
+    console.log(passWord1, passWord2);
     if (passWord1 == passWord2) {
       setMatchedPWD(false);
       return true;
@@ -106,7 +107,7 @@ const Signup = ({ login, setLogin }) => {
         className="flex flex-col text-start text-sm gap-2 w-full "
         onSubmit={(e) => {
           e.preventDefault();
-          passWordMatched(messageContext.userPassword, repeatPassword)
+          passWordMatched(userSignUp.passWord, repeatPassword)
             ? insert_data()
             : null;
         }}
