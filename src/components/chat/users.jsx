@@ -25,7 +25,7 @@ const users = () => {
   };
 
   useEffect(() => {
-    fetch(import.meta.env.VITE_USER_HOST_NAME + "/users", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/users", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

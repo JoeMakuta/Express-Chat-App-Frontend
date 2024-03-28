@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { ApiCall } from "../../../helpers/api";
 import { Message, Message1 } from "../message";
 import GlobalLoader from "../../loader/global";
+import socket from "../../../helpers/socket";
 
 const MessagesChatting = () => {
   const { chatLoading, setChatLoading } = useContext(MessageContext);
@@ -35,6 +36,12 @@ const MessagesChatting = () => {
   };
 
   useEffect(() => {
+    socket.on("receive_message", (message) => {
+      setCurrentMessages((prev) => [...prev, message]);
+    });
+  }, [socket]);
+
+  useEffect(() => {
     LoadMessages();
   }, [currentConversation]);
 
@@ -47,9 +54,9 @@ const MessagesChatting = () => {
       {currentMessages.length !== 0 ? (
         currentMessages.map((elt, index) => {
           return elt?.senderId?._id == user._id ? (
-            <Message1 key={index} message={elt.body} user={elt.senderId} />
+            <Message1 key={index} message={elt.body} user={elt?.senderId} />
           ) : (
-            <Message key={index} message={elt.body} user={elt.senderId} />
+            <Message key={index} message={elt.body} user={elt?.senderId} />
           );
         })
       ) : (

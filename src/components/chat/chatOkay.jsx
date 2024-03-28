@@ -11,12 +11,6 @@ import io from "socket.io-client";
 
 const { VITE_USER_HOST_NAME } = import.meta.env;
 
-export let socket = io.connect(VITE_USER_HOST_NAME, {
-  auth: {
-    userId: localStorage.getItem("userId"),
-  },
-});
-
 const AllMessages = () => {
   const messageContext = useContext(MessageContext);
   useEffect(() => {

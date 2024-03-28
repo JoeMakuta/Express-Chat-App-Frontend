@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ApiCall } from "../../../helpers/api";
 import { MessageContext } from "../../../App";
 import { useState } from "react";
+import socket from "../../../helpers/socket";
 
 const MessageType = () => {
   const [writtenText, setWrittenText] = useState("");
@@ -14,6 +15,11 @@ const MessageType = () => {
 
   const SendMessage = async (e) => {
     setSendingMessage(true);
+    socket.emit("send_message", {
+      senderId: user,
+      body: writtenText,
+      conversationId: currentConversation?._id,
+    });
     e.preventDefault();
     try {
       const { data } = await ApiCall.post({

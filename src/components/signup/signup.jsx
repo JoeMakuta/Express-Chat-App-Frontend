@@ -45,7 +45,7 @@ const Signup = ({ login, setLogin }) => {
     try {
       toast.promise(
         axios.post(
-          import.meta.env.VITE_USER_HOST_NAME + "/signup",
+          import.meta.env.VITE_BACKEND_URL + "/signup",
           {
             ...userSignUp,
           },
