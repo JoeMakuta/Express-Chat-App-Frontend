@@ -2,19 +2,37 @@ import { useContext } from "react";
 import { ApiCall } from "../../../helpers/api";
 import { MessageContext } from "../../../App";
 import { useState } from "react";
+import socket from "../../../helpers/socket";
 
 const MessageType = () => {
   const [writtenText, setWrittenText] = useState("");
   const [sendingMessage, setSendingMessage] = useState(false);
 
-  const { currentConversation, setCurrentConversation } =
+  const { currentConversation, setCurrentConversation, setCurrentMessages } =
     useContext(MessageContext);
 
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const SendMessage = async (e) => {
     setSendingMessage(true);
+
+    socket.emit("send_message", {
+      senderId: user,
+      body: writtenText,
+      conversationId: currentConversation?._id,
+    });
+
+    setCurrentMessages((prev) => [
+      ...prev,
+      {
+        senderId: user,
+        body: writtenText,
+        conversationId: currentConversation?._id,
+      },
+    ]);
+
     e.preventDefault();
+
     try {
       const { data } = await ApiCall.post({
         url: "/newMessage/" + currentConversation?._id,

@@ -10,7 +10,7 @@ const SendMessage = (props) => {
   const [inputMessage, setInputMessage] = useState(null);
 
   const handleSend = async () => {
-    await fetch(import.meta.env.VITE_USER_HOST_NAME + "/newMessage", {
+    await fetch(import.meta.env.VITE_BACKEND_URL + "/newMessage", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

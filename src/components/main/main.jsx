@@ -6,6 +6,8 @@ import { Toaster } from "react-hot-toast";
 import Image1 from "../../assets/Image 2341.png";
 import Line from "../../assets/line.png";
 
+import "../../helpers/socket.js";
+
 const Home = () => {
   const [login, setLogin] = useState(true);
 

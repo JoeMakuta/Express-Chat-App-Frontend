@@ -1,8 +1,8 @@
 import axios from "axios";
-const { VITE_USER_HOST_NAME } = import.meta.env;
+const { VITE_BACKEND_URL } = import.meta.env;
 
 export class ApiCall {
-  static baseUrl = VITE_USER_HOST_NAME;
+  static baseUrl = VITE_BACKEND_URL;
 
   static get = async ({ url = "", token = "" } = {}) => {
     return await axios({

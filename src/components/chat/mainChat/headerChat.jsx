@@ -22,7 +22,7 @@ const HeaderChat = () => {
   }, []);
 
   return (
-    <div className=" h-[15%] min-h-[70px] border-b-[1px] flex gap-4 border-black/10 w-full  justify-between  items-center px-5">
+    <div className=" h-[15%]  min-h-[70px] max-h-[100px] border-b-[1px] flex gap-4 border-black/10 w-full  justify-between  items-center px-5">
       <div className=" flex items-center gap-4">
         <BiArrowBack size={20} className=" cursor-pointer block sm:hidden " />
         <User />
