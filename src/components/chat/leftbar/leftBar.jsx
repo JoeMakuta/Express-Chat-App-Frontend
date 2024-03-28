@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { MessageContext } from "../../../App";
 import { ApiCall } from "../../../helpers/api";
 import { toast } from "react-hot-toast";
+import socket from "../../../helpers/socket";
 
 const LeftBar = () => {
   const {
@@ -24,6 +25,7 @@ const LeftBar = () => {
   const { user, token } = JSON.parse(localStorage.getItem("currentUser"));
 
   const getOrCreateConversation = async (clickedUser) => {
+    socket.emit("leave_conversation", currentConversation?._id);
     setUserReceiver(clickedUser);
     setChatLoading(true);
     // if (currentConversation && userId != currentConversation.members[1]._id) {
@@ -36,6 +38,7 @@ const LeftBar = () => {
 
       // console.log(data);
       setCurrentConversation(data);
+      socket.emit("conversation", data?._id);
     } catch (error) {
       console.log(error);
     }
