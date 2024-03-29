@@ -39,9 +39,9 @@ const MessagesChatting = () => {
   };
 
   const scrollToBottom = () => {
-    scrollToBottomRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
+    scrollToBottomRef.current?.scroll({
+      top: scrollToBottomRef.current?.scrollHeight,
+      // behavior: "smooth",
     });
   };
 
@@ -66,6 +66,7 @@ const MessagesChatting = () => {
   ) : (
     <div
       ref={scrollToBottomRef}
+      id="style-4"
       className="overflow-y-scroll flex flex-col  items-center gap-4 h-[73%] p-3 w-full"
     >
       {currentMessages.length !== 0 ? (
